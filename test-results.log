@@ -1,0 +1,45 @@
+VBCSCompilerPreWarmer: watching VBCSCompiler (PID 30008)
+VBCSCompilerPreWarmer: pre-warm launched (dotnet PID 16984)
+VBCSCompiler prewarm took 16.22 ms
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.6/staging' branch; Version is '6000.6.3f1 (45d8eee7de74) revision 4577518'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-kaushal" at "2026-10-06T16:12:52.314879Z"
+OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'en' Physical Memory: 24351 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-10-06T16:12:52Z
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 21100, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.3+d7ffd15
+  Session Id:              c16bdd159c9e43a7a836454887b1b8a1
+  Correlation Id:          8816a62a278748404cbabc5413d773ca
+  External correlation Id: 8804567019122080627
+  Machine Id:              /T577LdIKuLlQU9egg/J8PudUxA=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-kaushal" (connect: 0.00s, validation: 0.00s, handshake: 0.09s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-kaushal-notifications" at "2026-10-06T16:12:52.4120245Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 13469457453201-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Module] Licensing Background thread has ended after 0.11s
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.6.3f1\Editor\Unity.exe
+-projectPath
+C:\Users\kaushal\Inventory System
+-runTests
+-testPlatform
+editmode
+-batchmode
+-quit
+-logFile
+C:\Users\kaushal\Inventory System\test-results.log
+Successfully changed project path to: C:\Users\kaushal\Inventory System
+C:/Users/kaushal/Inventory System
+[ExitDontLaunchBugReporter] Exiting without the bug reporter. Application will exit with return code 1

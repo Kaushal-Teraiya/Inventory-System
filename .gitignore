@@ -9,10 +9,9 @@
 [Rr]ecordings/
 
 .vs/
-.vscode/
+.idea/
 
 *.csproj
-*.unityproj
 *.sln
 *.suo
 *.user
@@ -21,7 +20,8 @@
 *.booproj
 *.svd
 
-.DS_Store
-Thumbs.db
+sysinfo.txt
 
-*.slnx
+# TextMesh Pro generated/imported assets
+Assets/TextMesh Pro/
+Assets/TextMesh Pro.meta
