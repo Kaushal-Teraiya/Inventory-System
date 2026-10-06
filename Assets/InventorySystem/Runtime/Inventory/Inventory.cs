@@ -10,6 +10,8 @@ namespace InventorySystem.Inventory
 
         public IReadOnlyList<InventorySlot> Slots => slots;
 
+        public event System.Action<InventorySlot> SlotChanged;
+        public event System.Action InventoryChanged;
         public int Capacity => slots.Count;
         public float MaxWeight { get; }
         public float CurrentWeight { get; private set; }
@@ -83,6 +85,7 @@ namespace InventorySystem.Inventory
                 {
                     slot.Stack.AddQuantity(amountToAdd);
                     remaining -= amountToAdd;
+                    NotifySlotChanged(slot);
                 }
 
                 if (remaining == 0)
@@ -111,8 +114,8 @@ namespace InventorySystem.Inventory
                 var stack = new ItemStack(item, amountToAdd);
 
                 slot.SetStack(stack);
-
                 remaining -= amountToAdd;
+                NotifySlotChanged(slot);
             }
             return InventoryOperationResult.Success(quantity);
         }
@@ -163,6 +166,8 @@ namespace InventorySystem.Inventory
                 remaining -= amountToRemove;
 
                 if (slot.Stack.Quantity == 0) slot.Clear();
+
+                NotifySlotChanged(slot);
                 if (remaining == 0) break;
             }
 
@@ -193,6 +198,9 @@ namespace InventorySystem.Inventory
             source.Stack.TryRemoveQuantity(quantity);
             target.SetStack(new ItemStack(source.Stack.Item, quantity));
 
+            NotifySlotChanged(source);
+            NotifySlotChanged(target);
+
             return InventoryOperationResult.Success(quantity);
         }
         public InventoryOperationResult TransferTo(_Inventory targetInventory, ItemInstance item, int quantity)
@@ -214,12 +222,83 @@ namespace InventorySystem.Inventory
             RemoveItem(item, quantity);
             return result;
         }
+        private void NotifySlotChanged(InventorySlot slot)
+        {
+            SlotChanged?.Invoke(slot);
+            InventoryChanged?.Invoke();
+        }
+
+        private void NotifyInventoryChanged()
+        {
+            InventoryChanged?.Invoke();
+        }
         public void Clear()
         {
+            bool changed = false;
+
             foreach (var slot in slots)
+            {
+                if (slot.IsEmpty)
+                    continue;
+
                 slot.Clear();
+                SlotChanged?.Invoke(slot);
+                changed = true;
+            }
 
             CurrentWeight = 0f;
+
+            if (changed)
+                NotifyInventoryChanged();
+        }
+        public InventoryOperationResult AddItemToSlot(int slotIndex, ItemInstance item, int quantity)
+        {
+            if (slotIndex < 0 || slotIndex >= slots.Count)
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.InvalidSlot);
+
+            if (item == null)
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.InvalidItem);
+
+            if (quantity <= 0)
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.InvalidQuantity);
+
+            if (CurrentWeight + item.Definition.Weight * quantity > MaxWeight)
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.InventoryFull);
+
+            var slot = slots[slotIndex];
+
+            if (slot.IsEmpty)
+            {
+                if (quantity > item.Definition.MaxStackSize)
+                    return InventoryOperationResult.Failed(
+                        InventoryOperationResult.InventoryOperationFailure.OperationNotAllowed);
+
+                slot.SetStack(new ItemStack(item, quantity));
+                CurrentWeight += item.Definition.Weight * quantity;
+                NotifySlotChanged(slot);
+
+                return InventoryOperationResult.Success(quantity);
+            }
+
+            if (!InventoryRules.AreItemsStackCompatible(slot.Stack.Item, item))
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.OperationNotAllowed);
+
+            int capacity = InventoryRules.GetRemainingStackCapacity(slot.Stack);
+
+            if (quantity > capacity)
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.OperationNotAllowed);
+
+            slot.Stack.AddQuantity(quantity);
+            CurrentWeight += item.Definition.Weight * quantity;
+            NotifySlotChanged(slot);
+
+            return InventoryOperationResult.Success(quantity);
         }
         public InventoryOperationResult MoveItem(int sourceIndex, int targetIndex)
         {
@@ -244,6 +323,9 @@ namespace InventorySystem.Inventory
                 target.SetStack(source.Stack);
                 source.Clear();
 
+                NotifySlotChanged(source);
+                NotifySlotChanged(target);
+
                 return InventoryOperationResult.Success(target.Stack.Quantity);
             }
 
@@ -265,12 +347,18 @@ namespace InventorySystem.Inventory
                 if (source.Stack.Quantity == 0)
                     source.Clear();
 
+                NotifySlotChanged(source);
+                NotifySlotChanged(target);
+
                 return InventoryOperationResult.Success(amount);
             }
 
             var sourceStack = source.Stack;
             source.SetStack(target.Stack);
             target.SetStack(sourceStack);
+
+            NotifySlotChanged(source);
+            NotifySlotChanged(target);
 
             return InventoryOperationResult.Success(sourceStack.Quantity);
         }
@@ -295,6 +383,8 @@ namespace InventorySystem.Inventory
                 slot.Clear();
 
             CurrentWeight -= item.Definition.Weight * quantity;
+
+            NotifySlotChanged(slot);
 
             return InventoryOperationResult.Success(quantity);
         }

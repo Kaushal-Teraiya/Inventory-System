@@ -80,5 +80,61 @@ namespace InventorySystem.Tests
         {
             typeof(ItemDefinition).GetField("itemId", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(definition, value);
         }
+        [Test]
+        public void ItemDefinition_IsValid_WhenConfiguredCorrectly()
+        {
+            var definition = ScriptableObject.CreateInstance<ItemDefinition>();
+
+            var serialized = new UnityEditor.SerializedObject(definition);
+            serialized.FindProperty("itemId").stringValue = "potion";
+            serialized.FindProperty("maxStackSize").intValue = 10;
+            serialized.FindProperty("weight").floatValue = 1f;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+
+            Assert.IsTrue(definition.IsValid);
+        }
+
+        [Test]
+        public void ItemDefinition_IsInvalid_WhenIdIsEmpty()
+        {
+            var definition = ScriptableObject.CreateInstance<ItemDefinition>();
+
+            var serialized = new UnityEditor.SerializedObject(definition);
+            serialized.FindProperty("itemId").stringValue = "";
+            serialized.FindProperty("maxStackSize").intValue = 10;
+            serialized.FindProperty("weight").floatValue = 1f;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+
+            Assert.IsFalse(definition.IsValid);
+        }
+
+        [Test]
+        public void ItemDefinition_IsValid_WhenMaxStackSizeIsClamped()
+        {
+            var definition = ScriptableObject.CreateInstance<ItemDefinition>();
+
+            var serialized = new UnityEditor.SerializedObject(definition);
+            serialized.FindProperty("itemId").stringValue = "potion";
+            serialized.FindProperty("maxStackSize").intValue = 0;
+            serialized.FindProperty("weight").floatValue = 1f;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+
+            Assert.AreEqual(1, definition.MaxStackSize);
+            Assert.IsTrue(definition.IsValid);
+        }
+
+        [Test]
+        public void ItemDefinition_IsInvalid_WhenWeightIsNegative()
+        {
+            var definition = ScriptableObject.CreateInstance<ItemDefinition>();
+
+            var serialized = new UnityEditor.SerializedObject(definition);
+            serialized.FindProperty("itemId").stringValue = "potion";
+            serialized.FindProperty("maxStackSize").intValue = 10;
+            serialized.FindProperty("weight").floatValue = -1f;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+
+            Assert.IsFalse(definition.IsValid);
+        }
     }
 }

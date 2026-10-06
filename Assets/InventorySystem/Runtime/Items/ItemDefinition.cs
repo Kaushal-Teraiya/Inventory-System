@@ -20,6 +20,10 @@ namespace InventorySystem.Items
         public int MaxStackSize => maxStackSize;
         public float Weight => weight;
 
+        public bool IsValid =>
+            Id.IsValid &&
+            maxStackSize >= 1 &&
+            weight >= 0f;
         private void OnValidate()
         {
             if (maxStackSize < 1) maxStackSize = 1;
