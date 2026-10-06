@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using InventorySystem.UI;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -12,11 +11,14 @@ namespace InventorySystem.UI
         [SerializeField] private GraphicRaycaster raycaster;
         [SerializeField] private InventoryContextMenu contextMenu;
 
+        private InventoryUI inventoryUI;
         private InventorySlotUI hoveredSlot;
         private InventorySlotUI draggedSlot;
 
         private void Awake()
         {
+            inventoryUI = GetComponent<InventoryUI>();
+
             if (raycaster == null)
                 raycaster = GetComponent<GraphicRaycaster>();
 
@@ -24,9 +26,8 @@ namespace InventorySystem.UI
                 raycaster = GetComponentInParent<GraphicRaycaster>();
 
             if (contextMenu == null)
-                contextMenu = GetComponentInChildren<InventoryContextMenu>(true);
-
-            var inventoryUI = GetComponent<InventoryUI>();
+                contextMenu =
+                    GetComponentInChildren<InventoryContextMenu>(true);
 
             if (contextMenu != null && inventoryUI != null)
                 contextMenu.Initialize(inventoryUI);
@@ -34,57 +35,65 @@ namespace InventorySystem.UI
 
         private void Update()
         {
-            if (raycaster == null || Mouse.current == null)
+            if (raycaster == null ||
+                Mouse.current == null ||
+                EventSystem.current == null)
                 return;
 
-            // Context menu owns the mouse while it is open.
-            if (contextMenu != null && contextMenu.gameObject.activeSelf)
+            // Menu is open: handle only menu input.
+            if (contextMenu != null &&
+                contextMenu.gameObject.activeSelf &&
+                contextMenu.SlotIndex >= 0)
             {
-                if (Keyboard.current != null &&
-                    Keyboard.current.escapeKey.wasPressedThisFrame)
-                {
-                    contextMenu.Close();
-                    return;
-                }
-
-                if (Mouse.current.rightButton.wasPressedThisFrame)
-                {
-                    contextMenu.Close();
-                    return;
-                }
-
+                HandleContextMenuInput();
                 return;
             }
 
             UpdateHoveredSlot();
 
+            // Right click opens menu.
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                OpenContextMenu();
+                return;
+            }
+
+            // Left mouse controls dragging.
             if (Mouse.current.leftButton.wasPressedThisFrame)
                 StartDrag();
 
             if (Mouse.current.leftButton.wasReleasedThisFrame)
                 EndDrag();
+        }
 
-            if (Mouse.current.rightButton.wasPressedThisFrame)
-                OpenContextMenu();
+        private List<RaycastResult> RaycastMouse()
+        {
+            var pointer =
+                new PointerEventData(EventSystem.current)
+                {
+                    position =
+                        Mouse.current.position.ReadValue()
+                };
+
+            var results =
+                new List<RaycastResult>();
+
+            raycaster.Raycast(pointer, results);
+
+            return results;
         }
 
         private void UpdateHoveredSlot()
         {
-            var pointerData =
-                new PointerEventData(EventSystem.current)
-                {
-                    position = Mouse.current.position.ReadValue()
-                };
-
-            var results = new List<RaycastResult>();
-            raycaster.Raycast(pointerData, results);
+            var results = RaycastMouse();
 
             InventorySlotUI slot = null;
 
             foreach (var result in results)
             {
-                slot = result.gameObject
-                    .GetComponentInParent<InventorySlotUI>();
+                slot =
+                    result.gameObject
+                        .GetComponentInParent<InventorySlotUI>();
 
                 if (slot != null)
                     break;
@@ -93,13 +102,19 @@ namespace InventorySystem.UI
             if (slot == hoveredSlot)
                 return;
 
-            if (hoveredSlot != null && hoveredSlot != draggedSlot)
+            if (hoveredSlot != null &&
+                hoveredSlot != draggedSlot)
+            {
                 hoveredSlot.SetSelected(false);
+            }
 
             hoveredSlot = slot;
 
-            if (hoveredSlot != null && hoveredSlot != draggedSlot)
+            if (hoveredSlot != null &&
+                hoveredSlot != draggedSlot)
+            {
                 hoveredSlot.SetSelected(true);
+            }
         }
 
         private void StartDrag()
@@ -127,11 +142,10 @@ namespace InventorySystem.UI
                 target != null &&
                 source.Index != target.Index)
             {
-                var inventoryUI = GetComponent<InventoryUI>();
-
-                var result = inventoryUI.Inventory.MoveItem(
-                    source.Index,
-                    target.Index);
+                var result =
+                    inventoryUI.Inventory.MoveItem(
+                        source.Index,
+                        target.Index);
 
                 if (result.Succeeded)
                 {
@@ -147,16 +161,68 @@ namespace InventorySystem.UI
 
         private void OpenContextMenu()
         {
-            if (hoveredSlot == null ||
+            if (contextMenu == null ||
+                hoveredSlot == null ||
                 hoveredSlot.BoundSlot == null ||
                 hoveredSlot.BoundSlot.IsEmpty)
                 return;
 
-            if (contextMenu == null)
-                return;
-
             contextMenu.Open(
                 hoveredSlot.BoundSlot.Index);
+        }
+
+        private void HandleContextMenuInput()
+        {
+            if (Keyboard.current != null &&
+                Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                contextMenu.Close();
+                return;
+            }
+
+            if (!Mouse.current.leftButton.wasPressedThisFrame)
+                return;
+
+            var results = RaycastMouse();
+
+            foreach (var result in results)
+            {
+                var button =
+                    result.gameObject
+                        .GetComponentInParent<Button>();
+
+                if (button == null)
+                    continue;
+
+                Debug.Log(
+                    $"Context button clicked: {button.name}");
+
+                var menu = result.gameObject.GetComponentInParent<InventoryContextMenu>();
+
+if (menu == null)
+    return;
+
+if (button.name.Equals("Use", System.StringComparison.OrdinalIgnoreCase))
+{
+    menu.Use();
+    return;
+}
+
+if (button.name.Equals("Drop", System.StringComparison.OrdinalIgnoreCase))
+{
+    menu.Drop();
+    return;
+}
+
+if (button.name.Equals("Split", System.StringComparison.OrdinalIgnoreCase))
+{
+    menu.Split();
+    return;
+}
+
+Debug.LogWarning($"Unknown context menu button: {button.name}");
+                return;
+            }
         }
     }
 }

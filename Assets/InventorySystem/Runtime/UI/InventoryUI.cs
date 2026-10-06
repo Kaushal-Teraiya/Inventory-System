@@ -1,4 +1,4 @@
-using InventorySystem.Domain;
+﻿using InventorySystem.Domain;
 using InventorySystem.Inventory;
 using InventorySystem.Items;
 using UnityEngine;
@@ -49,6 +49,14 @@ namespace InventorySystem.UI
                 foundSlots.Add(slotUI);
             }
 
+            foundSlots.Sort((a, b) =>
+            {
+                int aIndex = int.Parse(a.name.Substring(5));
+                int bIndex = int.Parse(b.name.Substring(5));
+
+                return aIndex.CompareTo(bIndex);
+            });
+
             slots = foundSlots.ToArray();
 
             mouseInput = GetComponent<InventoryUIMouseInput>();
@@ -75,7 +83,7 @@ namespace InventorySystem.UI
                 return;
 
             inventory.SlotChanged += HandleSlotChanged;
-            RefreshAll();
+            RefreshInventoryUI();
         }
 
         private void OnDisable()
@@ -114,7 +122,7 @@ namespace InventorySystem.UI
             slots[changedSlot.Index].Refresh();
         }
 
-        private void RefreshAll()
+        public void RefreshInventoryUI()
         {
             if (inventory == null)
                 return;
@@ -132,6 +140,8 @@ namespace InventorySystem.UI
         }
     }
 }
+
+
 
 
 
