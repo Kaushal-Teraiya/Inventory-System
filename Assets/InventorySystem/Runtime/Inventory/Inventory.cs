@@ -232,6 +232,89 @@ namespace InventorySystem.Inventory
         {
             InventoryChanged?.Invoke();
         }
+
+        public InventoryOperationResult TransferToTransactional(
+            _Inventory target,
+            ItemInstance item,
+            int quantity)
+        {
+            if (target == null)
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.OperationNotAllowed);
+
+            if (item == null)
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.InvalidItem);
+
+            if (quantity <= 0)
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.InvalidQuantity);
+
+            int sourceQuantityBefore = GetItemQuantity(item);
+
+            if (sourceQuantityBefore < quantity)
+                return InventoryOperationResult.Failed(
+                    InventoryOperationResult.InventoryOperationFailure.InvalidQuantity);
+
+            var transaction = new InventoryTransaction();
+
+            transaction.AddOperation(
+                () => RemoveItem(item, quantity),
+                () => AddItem(item, quantity));
+
+            transaction.AddOperation(
+                () => target.AddItem(item, quantity),
+                () => target.RemoveItem(item, quantity));
+
+            return transaction.Commit();
+        }
+        public InventorySnapshot CreateSnapshot()
+        {
+            var slots = new InventorySnapshot.SnapshotSlot[Capacity];
+
+            for (int i = 0; i < Capacity; i++)
+            {
+                var slot = Slots[i];
+
+                slots[i] = slot.IsEmpty
+                    ? new InventorySnapshot.SnapshotSlot(i, null, 0)
+                    : new InventorySnapshot.SnapshotSlot(
+                        i,
+                        slot.Stack.Item,
+                        slot.Stack.Quantity);
+            }
+
+            return new InventorySnapshot(slots);
+        }
+
+        public void RestoreSnapshot(InventorySnapshot snapshot)
+        {
+            if (snapshot == null)
+                throw new System.ArgumentNullException(nameof(snapshot));
+
+            if (snapshot.Slots == null ||
+                snapshot.Slots.Length != Capacity)
+                throw new System.ArgumentException(
+                    "Snapshot capacity does not match inventory capacity.",
+                    nameof(snapshot));
+
+            Clear();
+
+            foreach (var savedSlot in snapshot.Slots)
+            {
+                if (savedSlot.Item == null)
+                    continue;
+
+                var result = AddItemToSlot(
+                    savedSlot.Index,
+                    savedSlot.Item,
+                    savedSlot.Quantity);
+
+                if (!result.Succeeded)
+                    throw new System.InvalidOperationException(
+                        "Failed to restore inventory snapshot.");
+            }
+        }
         public void Clear()
         {
             bool changed = false;
@@ -447,3 +530,7 @@ namespace InventorySystem.Inventory
         }
     }
 }
+
+
+
+
