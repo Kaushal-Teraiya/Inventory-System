@@ -1,0 +1,259 @@
+﻿using UnityEditor;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Linq;
+
+public static class InventoryUIGenerator
+{
+    private static readonly Color Background = Hex("171522");
+    private static readonly Color SlotEmpty = Hex("05020D");
+    private static readonly Color Purple = Hex("8054C7");
+    private static readonly Color Gold = Hex("FFD166");
+    private static readonly Color Cyan = Hex("55F6E8");
+    private static readonly Color ButtonColor = Hex("493274");
+    private static Font Font => Resources.GetBuiltinResource<Font>("Arial.ttf");
+
+    [MenuItem("Inventory System/Generate Godot-Style UI")]
+    public static void Generate()
+    {
+        var root = GameObject.Find("InventoryUI");
+        if (root == null)
+        {
+            Debug.LogError("InventoryUI not found in the open scene. Open your inventory scene first.");
+            return;
+        }
+
+        if (!EditorUtility.DisplayDialog(
+            "Rebuild Inventory Layout",
+            "This rebuilds the visual hierarchy under InventoryPanel. Back up your scene first. Continue?",
+            "Rebuild", "Cancel")) return;
+
+        var panelTransform = root.transform.Find("InventoryPanel");
+        if (panelTransform == null)
+        {
+            Debug.LogError("InventoryPanel not found.");
+            return;
+        }
+
+        var panel = panelTransform.gameObject;
+        Undo.RegisterFullObjectHierarchyUndo(panel, "Build Godot-Style Inventory");
+
+        for (int i = panel.transform.childCount - 1; i >= 0; i--)
+            Undo.DestroyObjectImmediate(panel.transform.GetChild(i).gameObject);
+
+        var panelRect = panel.GetComponent<RectTransform>();
+        if (panelRect == null) panelRect = panel.AddComponent<RectTransform>();
+        StretchCenter(panelRect, 0.72f, 0.74f);
+        Image panelImage = GetOrAdd<Image>(panel);
+        panelImage.color = Background;
+        panelImage.raycastTarget = false;
+        AddOutline(panel, Hex("B65CFF"), 2f);
+
+        var header = Text(panel.transform, "Title", "INVENTORY", 28, FontStyles.Bold, Hex("F1ECFF"));
+        Anchored(header.rectTransform, new Vector2(0,1), new Vector2(0,1), new Vector2(26,-20), new Vector2(420,40), new Vector2(0,1));
+        header.alignment = TextAlignmentOptions.Left;
+
+        var subtitle = Text(panel.transform, "Subtitle", "ITEMS   /   EQUIPMENT", 11, FontStyles.Bold, Hex("B5A8CC"));
+        Anchored(subtitle.rectTransform, new Vector2(0,1), new Vector2(0,1), new Vector2(28,-59), new Vector2(300,22), new Vector2(0,1));
+        subtitle.alignment = TextAlignmentOptions.Left;
+
+        var accent = Rect(panel.transform, "HeaderAccent", new Vector2(38,4), new Vector2(0,1), new Vector2(0,1), new Vector2(28,-88), new Vector2(38,4));
+        GetOrAdd<Image>(accent).color = Hex("C56BFF");
+
+        var divider = Rect(panel.transform, "VerticalDivider", new Vector2(1,1), new Vector2(0,0), new Vector2(0,1), new Vector2(500, -96), new Vector2(1,-120));
+        GetOrAdd<Image>(divider).color = Hex("393044");
+
+        var grid = Rect(panel.transform, "SlotGrid", new Vector2(0,0), new Vector2(0,1), new Vector2(0,1), new Vector2(24,-100), new Vector2(365, -115));
+        var gridLayout = GetOrAdd<GridLayoutGroup>(grid);
+        gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        gridLayout.constraintCount = 5;
+        gridLayout.cellSize = new Vector2(66,66);
+        gridLayout.spacing = new Vector2(7,7);
+        gridLayout.padding = new RectOffset(0,0,0,0);
+        gridLayout.childAlignment = TextAnchor.UpperLeft;
+        gridLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
+        gridLayout.startAxis = GridLayoutGroup.Axis.Horizontal;
+
+        var existingSlots = root.GetComponentsInChildren<InventorySystem.UI.InventorySlotUI>(true)
+            .Where(s => s.transform != panel.transform && s.name.StartsWith("Slot_"))
+            .OrderBy(s => ParseIndex(s.name))
+            .ToArray();
+
+        int count = existingSlots.Length > 0 ? 20 : 20;
+        for (int i = 0; i < count; i++)
+        {
+            GameObject slot = new GameObject("Slot_" + i, typeof(RectTransform), typeof(Image), typeof(Button));
+            Undo.RegisterCreatedObjectUndo(slot, "Create Inventory Slot");
+            slot.transform.SetParent(grid.transform, false);
+            var image = slot.GetComponent<Image>();
+            image.color = SlotEmpty;
+            image.raycastTarget = true;
+            AddOutline(slot, Hex("210C3D"), 2f);
+            var button = slot.GetComponent<Button>();
+            button.transition = Selectable.Transition.ColorTint;
+            button.colors = new ColorBlock { normalColor=Color.white, highlightedColor=new Color(.85f,.8f,1), pressedColor=new Color(.65f,.5f,.85f), selectedColor=Color.white, disabledColor=new Color(.3f,.3f,.3f,.5f), colorMultiplier=1, fadeDuration=.08f };
+
+            var oldSlot = existingSlots.FirstOrDefault(s => ParseIndex(s.name) == i);
+            var slotUI = slot.AddComponent<InventorySystem.UI.InventorySlotUI>();
+            if (oldSlot != null) EditorUtility.CopySerialized(oldSlot, slotUI);
+
+            var icon = Rect(slot.transform, "Icon", Vector2.zero, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+            var iconImage = icon.AddComponent<Image>();
+            iconImage.color = new Color(1f, 1f, 1f, 0f);
+            iconImage.preserveAspect = true;
+            iconImage.raycastTarget = false;
+            iconImage.rectTransform.anchorMin = new Vector2(.12f,.12f);
+            iconImage.rectTransform.anchorMax = new Vector2(.88f,.88f);
+            iconImage.rectTransform.offsetMin = iconImage.rectTransform.offsetMax = Vector2.zero;
+
+            var quantity = Text(slot.transform, "Quantity", "", 14, FontStyles.Bold, Color.white);
+            Anchored(quantity.rectTransform, Vector2.one, Vector2.one, new Vector2(-4,4), new Vector2(35,22), Vector2.one);
+            quantity.alignment = TextAlignmentOptions.BottomRight;
+
+            var selection = Rect(slot.transform, "Selection", Vector2.zero, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+            var selImage = selection.AddComponent<Image>();
+            selImage.color = Gold;
+            selImage.raycastTarget = false;
+            selection.transform.SetAsFirstSibling();
+            selection.SetActive(false);
+        }
+
+        var card = Rect(panel.transform, "ItemDetailsPanel",
+    new Vector2(1, 0.5f), new Vector2(1, 0.5f),
+    new Vector2(1, 0.5f), new Vector2(-28, 0), new Vector2(260, 330));
+var cardImage = card.AddComponent<Image>();
+cardImage.color = Hex("211832");
+AddOutline(card, Purple, 1f);
+
+var preview = Rect(card.transform, "ItemPreview",
+    new Vector2(0.5f, 1), new Vector2(0.5f, 1),
+    new Vector2(0, -16), new Vector2(88, 88));
+var previewImage = preview.AddComponent<Image>();
+previewImage.color = new Color(1,1,1,0);
+previewImage.preserveAspect = true;
+previewImage.raycastTarget = false;
+
+var itemName = Text(card.transform, "ItemName", "Select an item",
+    20, FontStyles.Bold, Gold);
+Anchored(itemName.rectTransform, new Vector2(0,1), new Vector2(1,1),
+    new Vector2(0,-112), new Vector2(-24,32), new Vector2(0.5f,1));
+itemName.alignment = TextAlignmentOptions.Center;
+
+var details = Text(card.transform, "ItemDetails",
+    "Choose an item to view its details.",
+    15, FontStyles.Normal, Hex("E7DFF7"));
+Anchored(details.rectTransform, new Vector2(0,1), new Vector2(1,1),
+    new Vector2(14,-153), new Vector2(-28,74), new Vector2(0.5f,1));
+details.alignment = TextAlignmentOptions.TopLeft;
+
+MakeButton(card.transform, "UseButton", "USE",
+    new Vector2(0,1), new Vector2(1,1),
+    new Vector2(0,-235), new Vector2(-28,30));
+MakeButton(card.transform, "DropButton", "DROP 1",
+    new Vector2(0,1), new Vector2(1,1),
+    new Vector2(0,-273), new Vector2(-28,30));
+MakeButton(card.transform, "SplitButton", "SPLIT STACK",
+    new Vector2(0,1), new Vector2(1,1),
+    new Vector2(0,-311), new Vector2(-28,30));
+
+        MakeButton(panel.transform, "SortButton", "SORT", new Vector2(0,0), new Vector2(0,0), new Vector2(26,20), new Vector2(90,34));
+        MakeButton(panel.transform, "CloseButton", "CLOSE", new Vector2(0,0), new Vector2(0,0), new Vector2(124,20), new Vector2(90,34));
+
+        var health = Rect(root.transform, "PlayerHealthHUD", new Vector2(0,1), new Vector2(0,1), new Vector2(24,-24), new Vector2(300,160));
+        GetOrAdd<Image>(health).color = Hex("171522");
+        AddOutline(health, Purple, 1f);
+        var healthTitle = Text(health.transform, "HealthTitle", "PLAYER HEALTH", 16, FontStyles.Bold, Color.white);
+        Anchored(healthTitle.rectTransform, new Vector2(0,1), new Vector2(1,1), new Vector2(12,-8), new Vector2(-24,26), new Vector2(.5f,1));
+        healthTitle.alignment = TextAlignmentOptions.Left;
+        var hpText = Text(health.transform, "HealthText", "HP: 100 / 100", 14, FontStyles.Normal, Hex("E7DFF7"));
+        Anchored(hpText.rectTransform, new Vector2(0,1), new Vector2(1,1), new Vector2(12,-38), new Vector2(-24,24), new Vector2(.5f,1));
+        hpText.alignment = TextAlignmentOptions.Left;
+        var hpBar = Rect(health.transform, "HealthBar", new Vector2(0,1), new Vector2(1,1), new Vector2(12,-78), new Vector2(-24,18));
+        GetOrAdd<Image>(hpBar).color = Hex("7C53B5");
+        MakeButton(health.transform, "DamageTestButton", "TAKE 25 DAMAGE (TEST)", new Vector2(0,1), new Vector2(1,1), new Vector2(12,-124), new Vector2(-24,32));
+
+        EditorUtility.SetDirty(root);
+        EditorSceneManagerMark(root);
+        Debug.Log("Godot-style inventory layout generated. Assign item preview/details references in InventoryUI before play.");
+        Selection.activeGameObject = root;
+    }
+
+    private static int ParseIndex(string name) => int.TryParse(name.Replace("Slot_", ""), out int i) ? i : int.MaxValue;
+    private static Color Hex(string h) { ColorUtility.TryParseHtmlString("#"+h, out var c); return c; }
+
+    private static GameObject Rect(Transform parent, string name, Vector2 amin, Vector2 amax, Vector2 pos, Vector2 size)
+    {
+        var go = new GameObject(name, typeof(RectTransform));
+        go.transform.SetParent(parent, false);
+        var r = go.GetComponent<RectTransform>();
+        r.anchorMin=amin; r.anchorMax=amax; r.pivot=new Vector2(.5f,.5f); r.anchoredPosition=pos; r.sizeDelta=size;
+        return go;
+    }
+    private static GameObject Rect(Transform parent, string name, Vector2 pivot, Vector2 amin, Vector2 amax, Vector2 pos, Vector2 size)
+    {
+        var go = Rect(parent,name,amin,amax,pos,size);
+        go.GetComponent<RectTransform>().pivot=pivot;
+        return go;
+    }
+    private static void StretchCenter(RectTransform r, float width, float height)
+{
+    r.anchorMin = new Vector2(0.5f, 0.5f);
+    r.anchorMax = new Vector2(0.5f, 0.5f);
+    r.pivot = new Vector2(0.5f, 0.5f);
+    r.anchoredPosition = Vector2.zero;
+    r.sizeDelta = new Vector2(920f, 530f);
+}
+    private static T GetOrAdd<T>(GameObject go) where T : Component
+    {
+        var c=go.GetComponent<T>();
+        return c != null ? c : go.AddComponent<T>();
+    }
+    private static void AddOutline(GameObject go, Color color, float width)
+    {
+        var o=GetOrAdd<Outline>(go); o.effectColor=color; o.effectDistance=new Vector2(width,-width);
+    }
+    private static TMP_Text Text(Transform parent, string name, string value, float size, FontStyles style, Color color)
+    {
+        var go=new GameObject(name,typeof(RectTransform),typeof(TextMeshProUGUI));
+        go.transform.SetParent(parent,false);
+        var t=go.GetComponent<TextMeshProUGUI>();
+        t.text=value; t.font=TMP_Settings.defaultFontAsset; t.fontSize=size; t.fontStyle=style; t.color=color; t.raycastTarget=false; t.textWrappingMode=TextWrappingModes.Normal;
+        return t;
+    }
+    private static Button MakeButton(Transform parent, string name, string label, Vector2 amin, Vector2 amax, Vector2 pos, Vector2 size)
+    {
+        var go=Rect(parent,name,new Vector2(.5f,.5f),amin,amax,pos,size);
+        var image=go.AddComponent<Image>(); image.color=ButtonColor;
+        AddOutline(go,Hex("684A96"),1f);
+        var button=go.AddComponent<Button>();
+        button.targetGraphic=image;
+        var txt=Text(go.transform,"Label",label,13,FontStyles.Bold,Color.white);
+        Anchored(txt.rectTransform,Vector2.zero,Vector2.one,Vector2.zero,Vector2.zero,new Vector2(.5f,.5f));
+        txt.alignment=TextAlignmentOptions.Center;
+        return button;
+    }
+    private static void EditorSceneManagerMark(GameObject root)
+    {
+        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(root.scene);
+    }
+
+    private static void Anchored(
+        RectTransform r,
+        Vector2 anchorMin,
+        Vector2 anchorMax,
+        Vector2 position,
+        Vector2 size,
+        Vector2 pivot)
+    {
+        r.anchorMin = anchorMin;
+        r.anchorMax = anchorMax;
+        r.pivot = pivot;
+        r.anchoredPosition = position;
+        r.sizeDelta = size;
+    }
+}
+
+
+
+

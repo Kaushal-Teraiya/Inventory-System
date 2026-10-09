@@ -1,0 +1,1 @@
+Removed existing detail-panel children before runtime rebuild. Backup: C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs.bak

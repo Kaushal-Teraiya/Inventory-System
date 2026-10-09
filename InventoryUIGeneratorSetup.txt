@@ -1,0 +1,10 @@
+﻿Created editor generator:
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUIGenerator.cs
+
+Next:
+1. Wait for Unity compilation.
+2. Select Inventory System > Generate Inventory UI.
+3. Test the generated hierarchy and Console.
+
+This creates the visual hierarchy. It does not automatically wire Use,
+Drop, Split, Close, selection details, or drag/drop behavior.

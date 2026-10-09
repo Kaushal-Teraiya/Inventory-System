@@ -1,0 +1,47 @@
+﻿[gd_scene format=3 uid="uid://b8ld7e3o2o72g"]
+
+[ext_resource type="Script" uid="uid://bbh03s0slbq1m" path="res://Scripts/Inventory/UI/InventorySlotUI.cs" id="1_w8tn1"]
+
+[node name="InventorySlot" type="PanelContainer" unique_id=220783963]
+script = ExtResource("1_w8tn1")
+
+[node name="SlotContent" type="Control" parent="." unique_id=1055267828]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ItemIcon" type="TextureRect" parent="SlotContent" unique_id=645761053]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+[node name="QuantityLabel" type="Label" parent="SlotContent" unique_id=1246727240]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = -22.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+vertical_alignment = 2
+mouse_filter = 2
+

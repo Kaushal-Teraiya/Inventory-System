@@ -1,0 +1,266 @@
+OBJECT: InventoryUI/InventoryPanel/SlotGrid
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.00, 1.00), Position=(30.00, -120.00), Size=(510.00, 510.00)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_0
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(46.00, -46.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_0
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_0/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_0/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_1
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(144.00, -46.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_1
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_1/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_1/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_2
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(242.00, -46.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_2
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_2/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_2/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_3
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(340.00, -46.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_3
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_3/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_3/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_4
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(438.00, -46.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_4
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_4/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_4/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_5
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(46.00, -144.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_5
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_5/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_5/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_6
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(144.00, -144.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_6
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_6/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_6/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_7
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(242.00, -144.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_7
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_7/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_7/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_8
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(340.00, -144.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_8
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_8/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_8/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_9
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(438.00, -144.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_9
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_9/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_9/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_10
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(46.00, -242.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_10
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_10/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_10/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_11
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(144.00, -242.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_11
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_11/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_11/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_12
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(242.00, -242.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_12
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_12/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_12/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_13
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(340.00, -242.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_13
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_13/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_13/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_14
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(438.00, -242.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_14
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_14/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_14/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_15
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(46.00, -340.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_15
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_15/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_15/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_16
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(144.00, -340.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_16
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_16/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_16/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_17
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(242.00, -340.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_17
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_17/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_17/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_18
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(340.00, -340.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_18
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_18/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_18/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_19
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(438.00, -340.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_19
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_19/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_19/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_20
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(46.00, -438.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_20
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_20/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_20/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_21
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(144.00, -438.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_21
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_21/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_21/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_22
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(242.00, -438.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_22
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_22/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_22/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_23
+  AnchorMin=(0.00, 1.00), AnchorMax=(0.00, 1.00), Pivot=(0.50, 0.50), Position=(340.00, -438.00), Size=(88.00, 88.00)
+  ImageColor=RGBA(0.141, 0.141, 0.192, 1.000), RaycastTarget=True
+  ButtonTransition=ColorTint, TargetGraphic=Slot_23
+  Normal=RGBA(0.141, 0.141, 0.192, 1.000), Highlighted=RGBA(0.208, 0.196, 0.286, 1.000), Pressed=RGBA(0.318, 0.255, 0.424, 1.000), Selected=RGBA(0.318, 0.255, 0.424, 1.000)
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_23/Icon
+  AnchorMin=(0.12, 0.12), AnchorMax=(0.88, 0.88), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(1.000, 1.000, 1.000, 1.000), RaycastTarget=False
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_23/Selection
+  AnchorMin=(0.00, 0.00), AnchorMax=(1.00, 1.00), Pivot=(0.50, 0.50), Position=(0.00, 0.00), Size=(0.00, 0.00)
+  ImageColor=RGBA(0.750, 0.580, 1.000, 0.140), RaycastTarget=False

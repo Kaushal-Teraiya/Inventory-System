@@ -1,4 +1,4 @@
-using InventorySystem.Domain;
+﻿using InventorySystem.Domain;
 using UnityEngine;
 
 namespace InventorySystem.Items
@@ -11,22 +11,26 @@ namespace InventorySystem.Items
         [SerializeField] private string itemId;
         [SerializeField] private string displayName;
         [SerializeField] private Sprite icon;
-        [SerializeField] private int maxStackSize = 1;
-        [SerializeField] private float weight;
+        [SerializeField, Min(1)] private int maxStackSize = 1;
+        [SerializeField, Min(0f)] private float weight;
+        [SerializeField] private ItemUseEffect useEffect;
 
         public ItemId Id => new(itemId);
         public string DisplayName => displayName;
         public Sprite Icon => icon;
         public int MaxStackSize => maxStackSize;
         public float Weight => weight;
+        public ItemUseEffect UseEffect => useEffect;
 
         public bool IsValid =>
             Id.IsValid &&
             maxStackSize >= 1 &&
             weight >= 0f;
+
         private void OnValidate()
         {
-            if (maxStackSize < 1) maxStackSize = 1;
+            maxStackSize = Mathf.Max(1, maxStackSize);
+            weight = Mathf.Max(0f, weight);
         }
     }
 }

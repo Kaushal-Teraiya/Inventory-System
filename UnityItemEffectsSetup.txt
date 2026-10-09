@@ -1,0 +1,35 @@
+﻿SUCCESS: Files created and icons downloaded.
+
+Unity project:
+C:\Users\kaushal\Inventory System
+
+Created:
+Health.cs
+ItemUseService.cs
+DamageItemEffect.cs
+ItemUseEffect.cs
+HealingItemEffect.cs
+
+Modified:
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\Items\ItemDefinition.cs
+
+Icons:
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Icons\HealthPotion.png
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Icons\Sword.png
+
+Backup:
+C:\Users\kaushal\Inventory System\ItemEffectsBackup_20261009_155300
+
+Asset licenses:
+Both icons are listed as CC0 on OpenGameArt.
+
+NEXT STEPS IN UNITY:
+1. Wait for Unity to import the files and check the Console for compile errors.
+2. Select each PNG and set Texture Type to Sprite (2D and UI), then Apply.
+3. Add Health to the player/enemy GameObjects that need health.
+4. Create effects using Assets > Create > Inventory System > Effects.
+5. Assign each effect to its ItemDefinition's Use Effect field.
+
+IMPORTANT:
+This creates the effect system but does not yet wire InventoryContextMenu.Use()
+to ItemUseService. That integration must pass the correct user and target.

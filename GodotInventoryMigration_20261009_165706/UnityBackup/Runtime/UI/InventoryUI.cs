@@ -1,0 +1,272 @@
+﻿using System.Collections.Generic;
+using InventorySystem.Domain;
+using InventorySystem.Inventory;
+using InventorySystem.Items;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+namespace InventorySystem.UI
+{
+    public sealed class InventoryUI : MonoBehaviour
+    {
+        [SerializeField] private int inventoryCapacity = 24;
+        [SerializeField] private ItemDefinition testItem;
+        [SerializeField] private int testQuantity = 5;
+
+        private _Inventory inventory;
+        private InventorySlotUI[] slots;
+        private int selectedSlotIndex = -1;
+        private int splitSource = -1;
+        private TMP_Text details;
+        private Button useButton, dropButton, splitButton, closeButton;
+
+        public _Inventory Inventory => inventory;
+        public int SelectedSlotIndex => selectedSlotIndex;
+
+        private void Awake()
+        {
+            var found = new List<InventorySlotUI>();
+            foreach (var t in GetComponentsInChildren<Transform>(true))
+            {
+                if (!t.name.StartsWith("Slot_")) continue;
+                var slot = t.GetComponent<InventorySlotUI>();
+                if (slot == null) slot = t.gameObject.AddComponent<InventorySlotUI>();
+                found.Add(slot);
+            }
+
+            found.Sort((a,b) => ParseIndex(a.name).CompareTo(ParseIndex(b.name)));
+            slots = found.ToArray();
+            inventoryCapacity = Mathf.Max(1, inventoryCapacity);
+            inventory = new _Inventory(Mathf.Min(inventoryCapacity, slots.Length));
+
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (i >= inventory.Capacity) break;
+                slots[i].Bind(inventory.GetSlot(i));
+                int index = i;
+                var button = slots[i].GetComponent<Button>();
+                if (button != null)
+                {
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() => SelectSlot(index));
+                }
+            }
+
+            BuildDetailsPanel();
+
+            inventory.SlotChanged += OnSlotChanged;
+            inventory.InventoryChanged += RefreshDetails;
+
+            if (testItem != null && testItem.IsValid)
+                inventory.AddItem(new ItemInstance(testItem), Mathf.Max(1, testQuantity));
+
+            RefreshDetails();
+        }
+
+        private static int ParseIndex(string name)
+        {
+            return int.TryParse(name.Substring(5), out int i) ? i : int.MaxValue;
+        }
+
+        private void BuildDetailsPanel()
+        {
+            var panel = transform.Find("InventoryPanel");
+            if (panel == null) panel = transform;
+
+            var existing = panel.Find("ItemDetailsPanel");
+
+            // The generator and runtime must not both own the panel's children.
+            // Keep the panel object, but rebuild its contents exactly once.
+            if (existing != null)
+            {
+                for (int i = existing.childCount - 1; i >= 0; i--)
+                    UnityEngine.Object.Destroy(existing.GetChild(i).gameObject);
+            }
+            GameObject box;
+
+            if (existing != null) box = existing.gameObject;
+            else
+            {
+                box = new GameObject("ItemDetailsPanel", typeof(RectTransform), typeof(Image));
+                box.transform.SetParent(panel, false);
+            }
+
+            var rect = box.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(1, 0.5f);
+            rect.anchorMax = new Vector2(1, 0.5f);
+            rect.pivot = new Vector2(1, 0.5f);
+            rect.anchoredPosition = new Vector2(-18, 0);
+            rect.sizeDelta = new Vector2(280, 330);
+            box.GetComponent<Image>().color = new Color(.08f,.07f,.13f,.98f);
+
+            details = MakeText(box.transform, "ItemDetails", "Select an item", 18,
+                new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -20), new Vector2(-24, 110));
+
+            useButton = MakeButton(box.transform, "UseButton", "USE", -155);
+            dropButton = MakeButton(box.transform, "DropButton", "DROP 1", -205);
+            splitButton = MakeButton(box.transform, "SplitButton", "SPLIT STACK", -255);
+            closeButton = MakeButton(box.transform, "CloseButton", "CLOSE", -300);
+
+            useButton.onClick.AddListener(UseSelectedItem);
+            dropButton.onClick.AddListener(DropSelectedItem);
+            splitButton.onClick.AddListener(BeginSplit);
+            closeButton.onClick.AddListener(() => gameObject.SetActive(false));
+        }
+
+        private static TMP_Text MakeText(Transform parent, string name, string value,
+            float size, Vector2 amin, Vector2 amax, Vector2 pos, Vector2 dimensions)
+        {
+            var go = new GameObject(name, typeof(RectTransform), typeof(TextMeshProUGUI));
+            go.transform.SetParent(parent, false);
+            var r = go.GetComponent<RectTransform>();
+            r.anchorMin = amin; r.anchorMax = amax; r.pivot = new Vector2(.5f, 1);
+            r.anchoredPosition = pos; r.sizeDelta = dimensions;
+            var text = go.GetComponent<TMP_Text>();
+            text.text = value; text.fontSize = size; text.color = Color.white;
+            text.alignment = TextAlignmentOptions.TopLeft;
+            text.textWrappingMode = TextWrappingModes.Normal; text.raycastTarget = false;
+            return text;
+        }
+
+        private static Button MakeButton(Transform parent, string name, string label, float y)
+        {
+            var go = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
+            go.transform.SetParent(parent, false);
+            var r = go.GetComponent<RectTransform>();
+            r.anchorMin = new Vector2(.5f, 1); r.anchorMax = new Vector2(.5f, 1);
+            r.pivot = new Vector2(.5f, 1); r.anchoredPosition = new Vector2(0, y);
+            r.sizeDelta = new Vector2(220, 36);
+            go.GetComponent<Image>().color = new Color(.30f,.20f,.48f,1);
+            var button = go.GetComponent<Button>();
+            var text = MakeText(go.transform, "Label", label, 15,
+                Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+            text.alignment = TextAlignmentOptions.Center;
+            var tr = text.rectTransform;
+            tr.anchorMin = Vector2.zero; tr.anchorMax = Vector2.one;
+            tr.offsetMin = Vector2.zero; tr.offsetMax = Vector2.zero;
+            return button;
+        }
+
+
+        public void RefreshInventoryUI()
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i] != null)
+                    slots[i].Refresh();
+            }
+
+            RefreshDetails();
+        }
+        public void SelectSlot(int index)
+        {
+            if (index < 0 || index >= inventory.Capacity) return;
+            selectedSlotIndex = index;
+            for (int i = 0; i < slots.Length; i++) slots[i].SetSelected(i == index);
+            RefreshDetails();
+        }
+
+        public void MoveSlots(int source, int target)
+        {
+            if (splitSource >= 0)
+            {
+                if (source == splitSource && target != source)
+                {
+                    var s = inventory.GetSlot(source);
+                    if (s != null && !s.IsEmpty && s.Stack.Quantity > 1)
+                    {
+                        int amount = s.Stack.Quantity / 2;
+                        var result = inventory.SplitStack(source, target, amount);
+                        if (!result.Succeeded) Debug.LogWarning("Split failed: destination must be empty.");
+                    }
+                }
+                splitSource = -1;
+            }
+            else
+            {
+                var result = inventory.MoveItem(source, target);
+                if (!result.Succeeded) Debug.LogWarning("Move failed.");
+            }
+            SelectSlot(target);
+        }
+
+        private void BeginSplit()
+        {
+            var slot = inventory.GetSlot(selectedSlotIndex);
+            if (slot == null || slot.IsEmpty || slot.Stack.Quantity < 2)
+            {
+                Debug.Log("Select a stack containing at least two items.");
+                return;
+            }
+            splitSource = selectedSlotIndex;
+            Debug.Log("Split mode: drag the selected stack onto an empty slot.");
+        }
+
+        private void UseSelectedItem()
+        {
+            var slot = inventory.GetSlot(selectedSlotIndex);
+            if (slot == null || slot.IsEmpty) return;
+            Debug.LogWarning("No item-use effect is configured for this item. No item consumed.");
+        }
+
+        private void DropSelectedItem()
+        {
+            var slot = inventory.GetSlot(selectedSlotIndex);
+            if (slot == null || slot.IsEmpty) return;
+            var result = inventory.RemoveFromSlot(selectedSlotIndex, 1);
+            if (!result.Succeeded) Debug.LogWarning("Could not drop item.");
+            RefreshDetails();
+        }
+
+        private void OnSlotChanged(InventorySlot slot)
+        {
+            if (slot == null || slots == null || slot.Index >= slots.Length) return;
+            slots[slot.Index].Refresh();
+            RefreshDetails();
+        }
+
+        private void RefreshDetails()
+        {
+            if (details == null || inventory == null) return;
+            var slot = inventory.GetSlot(selectedSlotIndex);
+            if (slot == null || slot.IsEmpty)
+            {
+                details.text = "Select an item\n\nDrag items to move them.";
+                if (useButton != null) useButton.interactable = false;
+                if (dropButton != null) dropButton.interactable = false;
+                if (splitButton != null) splitButton.interactable = false;
+                return;
+            }
+
+            var def = slot.Stack.Item?.Definition;
+            if (def == null)
+            {
+                details.text = "Item details unavailable.";
+                if (useButton != null) useButton.interactable = false;
+                if (dropButton != null) dropButton.interactable = false;
+                if (splitButton != null) splitButton.interactable = false;
+                return;
+            }
+
+            details.text = $"{def.DisplayName}\n\nQuantity: {slot.Stack.Quantity}\nWeight: {def.Weight:0.##}\nStack limit: {def.MaxStackSize}";
+            if (useButton != null) useButton.interactable = true;
+            if (dropButton != null) dropButton.interactable = true;
+            if (splitButton != null) splitButton.interactable = slot.Stack.Quantity > 1;
+        }
+
+        private void OnDestroy()
+        {
+            if (inventory != null)
+            {
+                inventory.SlotChanged -= OnSlotChanged;
+                inventory.InventoryChanged -= RefreshDetails;
+            }
+        }
+    }
+}
+
+
+
+
+

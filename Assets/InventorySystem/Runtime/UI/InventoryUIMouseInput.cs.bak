@@ -1,0 +1,189 @@
+﻿
+using System.Collections.Generic;
+using InventorySystem.Inventory;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
+namespace InventorySystem.UI
+{
+    public sealed class InventoryUIMouseInput : MonoBehaviour
+    {
+        [SerializeField] private GraphicRaycaster raycaster;
+        [SerializeField] private Button splitButton;
+
+        private InventoryUI inventoryUI;
+        private InventorySlotUI hoveredSlot;
+        private InventorySlotUI draggedSlot;
+
+        private void Awake()
+        {
+            inventoryUI = GetComponent<InventoryUI>();
+
+            if (raycaster == null)
+                raycaster = GetComponent<GraphicRaycaster>();
+
+            if (splitButton == null)
+            {
+                var split = transform.Find("InventoryPanel/ItemDetailsPanel/SplitButton");
+                if (split != null)
+                    splitButton = split.GetComponent<Button>();
+            }
+
+            if (splitButton != null)
+                splitButton.onClick.AddListener(SplitSelectedStack);
+        }
+
+        private void OnDestroy()
+        {
+            if (splitButton != null)
+                splitButton.onClick.RemoveListener(SplitSelectedStack);
+        }
+
+        private void Update()
+        {
+            if (raycaster == null || Mouse.current == null ||
+                EventSystem.current == null || inventoryUI == null)
+                return;
+
+            UpdateHoveredSlot();
+
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+                StartDrag();
+
+            if (Mouse.current.leftButton.wasReleasedThisFrame)
+                EndDrag();
+        }
+
+        private List<RaycastResult> RaycastMouse()
+        {
+            var pointer = new PointerEventData(EventSystem.current)
+            {
+                position = Mouse.current.position.ReadValue()
+            };
+
+            var results = new List<RaycastResult>();
+            raycaster.Raycast(pointer, results);
+            return results;
+        }
+
+        private void UpdateHoveredSlot()
+        {
+            InventorySlotUI slot = null;
+
+            foreach (var result in RaycastMouse())
+            {
+                slot = result.gameObject.GetComponentInParent<InventorySlotUI>();
+                if (slot != null)
+                    break;
+            }
+
+            if (slot == hoveredSlot)
+                return;
+
+            if (hoveredSlot != null && hoveredSlot != draggedSlot)
+                hoveredSlot.SetSelected(false);
+
+            hoveredSlot = slot;
+
+            if (hoveredSlot != null && hoveredSlot != draggedSlot)
+                hoveredSlot.SetSelected(true);
+        }
+
+        private void StartDrag()
+        {
+            if (hoveredSlot == null || hoveredSlot.BoundSlot == null ||
+                hoveredSlot.BoundSlot.IsEmpty)
+                return;
+
+            draggedSlot = hoveredSlot;
+        }
+
+        private void EndDrag()
+        {
+            if (draggedSlot == null)
+                return;
+
+            var source = draggedSlot.BoundSlot;
+            var target = hoveredSlot != null ? hoveredSlot.BoundSlot : null;
+
+            if (source != null && target != null &&
+                !source.IsEmpty && source.Index != target.Index)
+            {
+                int sourceIndex = source.Index;
+                int targetIndex = target.Index;
+
+                var result = inventoryUI.Inventory.MoveItem(sourceIndex, targetIndex);
+
+                if (result.Succeeded)
+                    inventoryUI.SelectSlot(targetIndex);
+                else
+                    Debug.LogWarning($"Move failed: {result.Failure}");
+            }
+
+            draggedSlot = null;
+        }
+
+        public void SplitSelectedStack()
+        {
+            int sourceIndex = inventoryUI.SelectedSlotIndex;
+            var inventory = inventoryUI.Inventory;
+            var source = inventory.GetSlot(sourceIndex);
+
+            if (source == null || source.IsEmpty ||
+                source.Stack.Quantity < 2)
+            {
+                Debug.Log("Select a stack containing at least two items.");
+                return;
+            }
+
+            int targetIndex = -1;
+
+            for (int i = 0; i < inventory.Capacity; i++)
+            {
+                var candidate = inventory.GetSlot(i);
+
+                if (candidate != null && candidate.IsEmpty)
+                {
+                    targetIndex = i;
+                    break;
+                }
+            }
+
+            if (targetIndex < 0)
+            {
+                Debug.Log("No empty slot available for splitting.");
+                return;
+            }
+
+            int quantity = source.Stack.Quantity / 2;
+            var result = inventory.SplitStack(sourceIndex, targetIndex, quantity);
+
+            if (result.Succeeded)
+            {
+                inventoryUI.SelectSlot(targetIndex);
+                Debug.Log($"Split {quantity} items into slot {targetIndex}.");
+            }
+            else
+            {
+                Debug.LogWarning($"Split failed: {result.Failure}");
+            }
+        }
+
+        public void DropSelectedItem()
+        {
+            int index = inventoryUI.SelectedSlotIndex;
+            var slot = inventoryUI.Inventory.GetSlot(index);
+
+            if (slot == null || slot.IsEmpty)
+                return;
+
+            var result = inventoryUI.Inventory.RemoveFromSlot(
+                index, slot.Stack.Quantity);
+
+            if (!result.Succeeded)
+                Debug.LogWarning($"Drop failed: {result.Failure}");
+        }
+    }
+}

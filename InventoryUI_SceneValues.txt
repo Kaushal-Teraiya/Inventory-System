@@ -1,0 +1,1447 @@
+INVENTORY UI SCENE VALUES
+Scene: Assets/Scenes/SampleScene.unity
+Game view reference: inspect CanvasScaler below.
+
+[CANVAS] InventoryUI
+RenderMode=ScreenSpaceOverlay
+ScaleMode=ScaleWithScreenSize
+ReferenceResolution=(1920.00, 1080.00)
+MatchMode=MatchWidthOrHeight
+MatchWidthOrHeight=0.5
+
+OBJECT: InventoryUI
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(0.00, 0.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(615.88, 418.63)
+  SizeDelta=(1746.61, 1187.21)
+  OffsetMin=(-257.43, -174.98)
+  OffsetMax=(1489.18, 1012.23)
+  Rect=(x:-873.31, y:-593.61, width:1746.61, height:1187.21)
+  WorldCorners=(0.0, 0.0, 0.0) | (0.0, 837.3, 0.0) | (1231.8, 837.3, 0.0) | (1231.8, 0.0, 0.0)
+
+OBJECT: InventoryUI/InventoryPanel
+Active=True
+  AnchorMin=(0.50, 0.50)
+  AnchorMax=(0.50, 0.50)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(920.00, 530.00)
+  OffsetMin=(-460.00, -265.00)
+  OffsetMax=(460.00, 265.00)
+  Rect=(x:-460.00, y:-265.00, width:920.00, height:530.00)
+  WorldCorners=(291.5, 231.7, 0.0) | (291.5, 605.5, 0.0) | (940.3, 605.5, 0.0) | (940.3, 231.7, 0.0)
+  Image: Color=RGBA(0.090, 0.082, 0.133, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/Title
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.00, 1.00)
+  AnchoredPosition=(26.00, -20.00)
+  SizeDelta=(420.00, 40.00)
+  OffsetMin=(26.00, -60.00)
+  OffsetMax=(446.00, -20.00)
+  Rect=(x:0.00, y:-40.00, width:420.00, height:40.00)
+  WorldCorners=(309.8, 563.2, 0.0) | (309.8, 591.4, 0.0) | (606.0, 591.4, 0.0) | (606.0, 563.2, 0.0)
+  TMP: Text=[INVENTORY], FontSize=28, Alignment=Left, Color=RGBA(0.945, 0.925, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/Subtitle
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.00, 1.00)
+  AnchoredPosition=(28.00, -59.00)
+  SizeDelta=(300.00, 22.00)
+  OffsetMin=(28.00, -81.00)
+  OffsetMax=(328.00, -59.00)
+  Rect=(x:0.00, y:-22.00, width:300.00, height:22.00)
+  WorldCorners=(311.2, 548.4, 0.0) | (311.2, 563.9, 0.0) | (522.8, 563.9, 0.0) | (522.8, 548.4, 0.0)
+  TMP: Text=[ITEMS   /   EQUIPMENT], FontSize=11, Alignment=Left, Color=RGBA(0.710, 0.659, 0.800, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/HeaderAccent
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(38.00, 4.00)
+  AnchoredPosition=(28.00, -88.00)
+  SizeDelta=(38.00, 4.00)
+  OffsetMin=(-1416.00, -104.00)
+  OffsetMax=(-1378.00, -100.00)
+  Rect=(x:-1444.00, y:-16.00, width:38.00, height:4.00)
+  WorldCorners=(-707.1, 532.2, 0.0) | (-707.1, 535.0, 0.0) | (-680.3, 535.0, 0.0) | (-680.3, 532.2, 0.0)
+  Image: Color=RGBA(0.773, 0.420, 1.000, 1.000), Sprite=null, Enabled=True, Raycast=True
+
+OBJECT: InventoryUI/InventoryPanel/VerticalDivider
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(500.00, -96.00)
+  SizeDelta=(1.00, -120.00)
+  OffsetMin=(499.00, 24.00)
+  OffsetMax=(500.00, -96.00)
+  Rect=(x:-1.00, y:-410.00, width:1.00, height:410.00)
+  WorldCorners=(643.4, 248.7, 0.0) | (643.4, 537.8, 0.0) | (644.1, 537.8, 0.0) | (644.1, 248.7, 0.0)
+  Image: Color=RGBA(0.224, 0.188, 0.267, 1.000), Sprite=null, Enabled=True, Raycast=True
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(71.00, -12.50)
+  SizeDelta=(365.00, -115.00)
+  OffsetMin=(71.00, -12.50)
+  OffsetMax=(436.00, -127.50)
+  Rect=(x:0.00, y:0.00, width:365.00, height:-115.00)
+  WorldCorners=(341.5, 596.7, 0.0) | (341.5, 515.6, 0.0) | (598.9, 515.6, 0.0) | (598.9, 596.7, 0.0)
+  Grid: Cell=(66.00, 66.00), Spacing=(7.00, 7.00), Padding=0,0,0,0, Constraint=FixedColumnCount, Columns=5, ChildAlignment=UpperLeft
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_0
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(33.00, -33.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(0.00, -66.00)
+  OffsetMax=(66.00, 0.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(341.5, 469.0, 0.0) | (341.5, 515.6, 0.0) | (388.1, 515.6, 0.0) | (388.1, 469.0, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_0/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(341.5, 469.0, 0.0) | (341.5, 515.6, 0.0) | (388.1, 515.6, 0.0) | (388.1, 469.0, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_0/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(347.1, 474.6, 0.0) | (347.1, 510.0, 0.0) | (382.5, 510.0, 0.0) | (382.5, 474.6, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_0/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(360.6, 502.9, 0.0) | (360.6, 518.4, 0.0) | (385.3, 518.4, 0.0) | (385.3, 502.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_1
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(106.00, -33.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(73.00, -66.00)
+  OffsetMax=(139.00, 0.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(393.0, 469.0, 0.0) | (393.0, 515.6, 0.0) | (439.6, 515.6, 0.0) | (439.6, 469.0, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_1/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(393.0, 469.0, 0.0) | (393.0, 515.6, 0.0) | (439.6, 515.6, 0.0) | (439.6, 469.0, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_1/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(398.6, 474.6, 0.0) | (398.6, 510.0, 0.0) | (434.0, 510.0, 0.0) | (434.0, 474.6, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_1/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(412.1, 502.9, 0.0) | (412.1, 518.4, 0.0) | (436.7, 518.4, 0.0) | (436.7, 502.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_2
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(179.00, -33.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(146.00, -66.00)
+  OffsetMax=(212.00, 0.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(444.5, 469.0, 0.0) | (444.5, 515.6, 0.0) | (491.1, 515.6, 0.0) | (491.1, 469.0, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_2/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(444.5, 469.0, 0.0) | (444.5, 515.6, 0.0) | (491.1, 515.6, 0.0) | (491.1, 469.0, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_2/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(450.1, 474.6, 0.0) | (450.1, 510.0, 0.0) | (485.5, 510.0, 0.0) | (485.5, 474.6, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_2/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(463.5, 502.9, 0.0) | (463.5, 518.4, 0.0) | (488.2, 518.4, 0.0) | (488.2, 502.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_3
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(252.00, -33.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(219.00, -66.00)
+  OffsetMax=(285.00, 0.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(496.0, 469.0, 0.0) | (496.0, 515.6, 0.0) | (542.5, 515.6, 0.0) | (542.5, 469.0, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_3/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(496.0, 469.0, 0.0) | (496.0, 515.6, 0.0) | (542.5, 515.6, 0.0) | (542.5, 469.0, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_3/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(501.6, 474.6, 0.0) | (501.6, 510.0, 0.0) | (536.9, 510.0, 0.0) | (536.9, 474.6, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_3/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(515.0, 502.9, 0.0) | (515.0, 518.4, 0.0) | (539.7, 518.4, 0.0) | (539.7, 502.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_4
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(325.00, -33.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(292.00, -66.00)
+  OffsetMax=(358.00, 0.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(547.5, 469.0, 0.0) | (547.5, 515.6, 0.0) | (594.0, 515.6, 0.0) | (594.0, 469.0, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_4/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(547.5, 469.0, 0.0) | (547.5, 515.6, 0.0) | (594.0, 515.6, 0.0) | (594.0, 469.0, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_4/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(553.1, 474.6, 0.0) | (553.1, 510.0, 0.0) | (588.4, 510.0, 0.0) | (588.4, 474.6, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_4/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(566.5, 502.9, 0.0) | (566.5, 518.4, 0.0) | (591.2, 518.4, 0.0) | (591.2, 502.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_5
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(33.00, -106.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(0.00, -139.00)
+  OffsetMax=(66.00, -73.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(341.5, 417.6, 0.0) | (341.5, 464.1, 0.0) | (388.1, 464.1, 0.0) | (388.1, 417.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_5/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(341.5, 417.6, 0.0) | (341.5, 464.1, 0.0) | (388.1, 464.1, 0.0) | (388.1, 417.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_5/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(347.1, 423.2, 0.0) | (347.1, 458.5, 0.0) | (382.5, 458.5, 0.0) | (382.5, 423.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_5/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(360.6, 451.4, 0.0) | (360.6, 466.9, 0.0) | (385.3, 466.9, 0.0) | (385.3, 451.4, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_6
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(106.00, -106.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(73.00, -139.00)
+  OffsetMax=(139.00, -73.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(393.0, 417.6, 0.0) | (393.0, 464.1, 0.0) | (439.6, 464.1, 0.0) | (439.6, 417.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_6/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(393.0, 417.6, 0.0) | (393.0, 464.1, 0.0) | (439.6, 464.1, 0.0) | (439.6, 417.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_6/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(398.6, 423.2, 0.0) | (398.6, 458.5, 0.0) | (434.0, 458.5, 0.0) | (434.0, 423.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_6/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(412.1, 451.4, 0.0) | (412.1, 466.9, 0.0) | (436.7, 466.9, 0.0) | (436.7, 451.4, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_7
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(179.00, -106.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(146.00, -139.00)
+  OffsetMax=(212.00, -73.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(444.5, 417.6, 0.0) | (444.5, 464.1, 0.0) | (491.1, 464.1, 0.0) | (491.1, 417.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_7/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(444.5, 417.6, 0.0) | (444.5, 464.1, 0.0) | (491.1, 464.1, 0.0) | (491.1, 417.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_7/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(450.1, 423.2, 0.0) | (450.1, 458.5, 0.0) | (485.5, 458.5, 0.0) | (485.5, 423.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_7/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(463.5, 451.4, 0.0) | (463.5, 466.9, 0.0) | (488.2, 466.9, 0.0) | (488.2, 451.4, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_8
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(252.00, -106.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(219.00, -139.00)
+  OffsetMax=(285.00, -73.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(496.0, 417.6, 0.0) | (496.0, 464.1, 0.0) | (542.5, 464.1, 0.0) | (542.5, 417.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_8/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(496.0, 417.6, 0.0) | (496.0, 464.1, 0.0) | (542.5, 464.1, 0.0) | (542.5, 417.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_8/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(501.6, 423.2, 0.0) | (501.6, 458.5, 0.0) | (536.9, 458.5, 0.0) | (536.9, 423.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_8/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(515.0, 451.4, 0.0) | (515.0, 466.9, 0.0) | (539.7, 466.9, 0.0) | (539.7, 451.4, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_9
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(325.00, -106.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(292.00, -139.00)
+  OffsetMax=(358.00, -73.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(547.5, 417.6, 0.0) | (547.5, 464.1, 0.0) | (594.0, 464.1, 0.0) | (594.0, 417.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_9/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(547.5, 417.6, 0.0) | (547.5, 464.1, 0.0) | (594.0, 464.1, 0.0) | (594.0, 417.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_9/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(553.1, 423.2, 0.0) | (553.1, 458.5, 0.0) | (588.4, 458.5, 0.0) | (588.4, 423.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_9/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(566.5, 451.4, 0.0) | (566.5, 466.9, 0.0) | (591.2, 466.9, 0.0) | (591.2, 451.4, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_10
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(33.00, -179.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(0.00, -212.00)
+  OffsetMax=(66.00, -146.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(341.5, 366.1, 0.0) | (341.5, 412.6, 0.0) | (388.1, 412.6, 0.0) | (388.1, 366.1, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_10/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(341.5, 366.1, 0.0) | (341.5, 412.6, 0.0) | (388.1, 412.6, 0.0) | (388.1, 366.1, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_10/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(347.1, 371.7, 0.0) | (347.1, 407.0, 0.0) | (382.5, 407.0, 0.0) | (382.5, 371.7, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_10/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(360.6, 399.9, 0.0) | (360.6, 415.5, 0.0) | (385.3, 415.5, 0.0) | (385.3, 399.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_11
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(106.00, -179.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(73.00, -212.00)
+  OffsetMax=(139.00, -146.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(393.0, 366.1, 0.0) | (393.0, 412.6, 0.0) | (439.6, 412.6, 0.0) | (439.6, 366.1, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_11/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(393.0, 366.1, 0.0) | (393.0, 412.6, 0.0) | (439.6, 412.6, 0.0) | (439.6, 366.1, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_11/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(398.6, 371.7, 0.0) | (398.6, 407.0, 0.0) | (434.0, 407.0, 0.0) | (434.0, 371.7, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_11/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(412.1, 399.9, 0.0) | (412.1, 415.5, 0.0) | (436.7, 415.5, 0.0) | (436.7, 399.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_12
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(179.00, -179.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(146.00, -212.00)
+  OffsetMax=(212.00, -146.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(444.5, 366.1, 0.0) | (444.5, 412.6, 0.0) | (491.1, 412.6, 0.0) | (491.1, 366.1, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_12/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(444.5, 366.1, 0.0) | (444.5, 412.6, 0.0) | (491.1, 412.6, 0.0) | (491.1, 366.1, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_12/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(450.1, 371.7, 0.0) | (450.1, 407.0, 0.0) | (485.5, 407.0, 0.0) | (485.5, 371.7, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_12/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(463.5, 399.9, 0.0) | (463.5, 415.5, 0.0) | (488.2, 415.5, 0.0) | (488.2, 399.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_13
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(252.00, -179.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(219.00, -212.00)
+  OffsetMax=(285.00, -146.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(496.0, 366.1, 0.0) | (496.0, 412.6, 0.0) | (542.5, 412.6, 0.0) | (542.5, 366.1, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_13/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(496.0, 366.1, 0.0) | (496.0, 412.6, 0.0) | (542.5, 412.6, 0.0) | (542.5, 366.1, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_13/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(501.6, 371.7, 0.0) | (501.6, 407.0, 0.0) | (536.9, 407.0, 0.0) | (536.9, 371.7, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_13/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(515.0, 399.9, 0.0) | (515.0, 415.5, 0.0) | (539.7, 415.5, 0.0) | (539.7, 399.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_14
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(325.00, -179.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(292.00, -212.00)
+  OffsetMax=(358.00, -146.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(547.5, 366.1, 0.0) | (547.5, 412.6, 0.0) | (594.0, 412.6, 0.0) | (594.0, 366.1, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_14/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(547.5, 366.1, 0.0) | (547.5, 412.6, 0.0) | (594.0, 412.6, 0.0) | (594.0, 366.1, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_14/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(553.1, 371.7, 0.0) | (553.1, 407.0, 0.0) | (588.4, 407.0, 0.0) | (588.4, 371.7, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_14/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(566.5, 399.9, 0.0) | (566.5, 415.5, 0.0) | (591.2, 415.5, 0.0) | (591.2, 399.9, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_15
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(33.00, -252.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(0.00, -285.00)
+  OffsetMax=(66.00, -219.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(341.5, 314.6, 0.0) | (341.5, 361.1, 0.0) | (388.1, 361.1, 0.0) | (388.1, 314.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_15/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(341.5, 314.6, 0.0) | (341.5, 361.1, 0.0) | (388.1, 361.1, 0.0) | (388.1, 314.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_15/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(347.1, 320.2, 0.0) | (347.1, 355.6, 0.0) | (382.5, 355.6, 0.0) | (382.5, 320.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_15/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(360.6, 348.5, 0.0) | (360.6, 364.0, 0.0) | (385.3, 364.0, 0.0) | (385.3, 348.5, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_16
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(106.00, -252.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(73.00, -285.00)
+  OffsetMax=(139.00, -219.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(393.0, 314.6, 0.0) | (393.0, 361.1, 0.0) | (439.6, 361.1, 0.0) | (439.6, 314.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_16/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(393.0, 314.6, 0.0) | (393.0, 361.1, 0.0) | (439.6, 361.1, 0.0) | (439.6, 314.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_16/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(398.6, 320.2, 0.0) | (398.6, 355.6, 0.0) | (434.0, 355.6, 0.0) | (434.0, 320.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_16/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(412.1, 348.5, 0.0) | (412.1, 364.0, 0.0) | (436.7, 364.0, 0.0) | (436.7, 348.5, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_17
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(179.00, -252.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(146.00, -285.00)
+  OffsetMax=(212.00, -219.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(444.5, 314.6, 0.0) | (444.5, 361.1, 0.0) | (491.1, 361.1, 0.0) | (491.1, 314.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_17/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(444.5, 314.6, 0.0) | (444.5, 361.1, 0.0) | (491.1, 361.1, 0.0) | (491.1, 314.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_17/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(450.1, 320.2, 0.0) | (450.1, 355.6, 0.0) | (485.5, 355.6, 0.0) | (485.5, 320.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_17/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(463.5, 348.5, 0.0) | (463.5, 364.0, 0.0) | (488.2, 364.0, 0.0) | (488.2, 348.5, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_18
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(252.00, -252.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(219.00, -285.00)
+  OffsetMax=(285.00, -219.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(496.0, 314.6, 0.0) | (496.0, 361.1, 0.0) | (542.5, 361.1, 0.0) | (542.5, 314.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_18/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(496.0, 314.6, 0.0) | (496.0, 361.1, 0.0) | (542.5, 361.1, 0.0) | (542.5, 314.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_18/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(501.6, 320.2, 0.0) | (501.6, 355.6, 0.0) | (536.9, 355.6, 0.0) | (536.9, 320.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_18/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(515.0, 348.5, 0.0) | (515.0, 364.0, 0.0) | (539.7, 364.0, 0.0) | (539.7, 348.5, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_19
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(0.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(325.00, -252.00)
+  SizeDelta=(66.00, 66.00)
+  OffsetMin=(292.00, -285.00)
+  OffsetMax=(358.00, -219.00)
+  Rect=(x:-33.00, y:-33.00, width:66.00, height:66.00)
+  WorldCorners=(547.5, 314.6, 0.0) | (547.5, 361.1, 0.0) | (594.0, 361.1, 0.0) | (594.0, 314.6, 0.0)
+  Image: Color=RGBA(0.020, 0.008, 0.051, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+  InventorySlotUI: SlotIndex=-1
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_19/Selection
+Active=False
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:66.00, height:66.00)
+  WorldCorners=(547.5, 314.6, 0.0) | (547.5, 361.1, 0.0) | (594.0, 361.1, 0.0) | (594.0, 314.6, 0.0)
+  Image: Color=RGBA(1.000, 0.820, 0.400, 1.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_19/Icon
+Active=True
+  AnchorMin=(0.12, 0.12)
+  AnchorMax=(0.88, 0.88)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:0.00, y:0.00, width:50.16, height:50.16)
+  WorldCorners=(553.1, 320.2, 0.0) | (553.1, 355.6, 0.0) | (588.4, 355.6, 0.0) | (588.4, 320.2, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/SlotGrid/Slot_19/Quantity
+Active=True
+  AnchorMin=(1.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(1.00, 1.00)
+  AnchoredPosition=(-4.00, 4.00)
+  SizeDelta=(35.00, 22.00)
+  OffsetMin=(-39.00, -18.00)
+  OffsetMax=(-4.00, 4.00)
+  Rect=(x:-35.00, y:-22.00, width:35.00, height:22.00)
+  WorldCorners=(566.5, 348.5, 0.0) | (566.5, 364.0, 0.0) | (591.2, 364.0, 0.0) | (591.2, 348.5, 0.0)
+  TMP: Text=[], FontSize=14, Alignment=BottomRight, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel
+Active=True
+  AnchorMin=(1.00, 0.50)
+  AnchorMax=(1.00, 0.50)
+  Pivot=(1.00, 0.50)
+  AnchoredPosition=(-70.00, 0.00)
+  SizeDelta=(260.00, 330.00)
+  OffsetMin=(-330.00, -165.00)
+  OffsetMax=(-70.00, 165.00)
+  Rect=(x:-260.00, y:-165.00, width:260.00, height:330.00)
+  WorldCorners=(707.6, 302.3, 0.0) | (707.6, 535.0, 0.0) | (890.9, 535.0, 0.0) | (890.9, 302.3, 0.0)
+  Image: Color=RGBA(0.129, 0.094, 0.196, 1.000), Sprite=null, Enabled=True, Raycast=True
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel/ItemPreview
+Active=True
+  AnchorMin=(0.50, 1.00)
+  AnchorMax=(0.50, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, -44.00)
+  SizeDelta=(88.00, 88.00)
+  OffsetMin=(-44.00, -88.00)
+  OffsetMax=(44.00, 0.00)
+  Rect=(x:-44.00, y:-44.00, width:88.00, height:88.00)
+  WorldCorners=(768.2, 472.9, 0.0) | (768.2, 535.0, 0.0) | (830.3, 535.0, 0.0) | (830.3, 472.9, 0.0)
+  Image: Color=RGBA(1.000, 1.000, 1.000, 0.000), Sprite=null, Enabled=True, Raycast=False
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel/ItemName
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 1.00)
+  AnchoredPosition=(0.00, -112.00)
+  SizeDelta=(-24.00, 32.00)
+  OffsetMin=(12.00, -144.00)
+  OffsetMax=(-12.00, -112.00)
+  Rect=(x:-118.00, y:-32.00, width:236.00, height:32.00)
+  WorldCorners=(716.0, 433.4, 0.0) | (716.0, 456.0, 0.0) | (882.4, 456.0, 0.0) | (882.4, 433.4, 0.0)
+  TMP: Text=[Select an item], FontSize=20, Alignment=Center, Color=RGBA(1.000, 0.820, 0.400, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel/ItemDetails
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 1.00)
+  AnchoredPosition=(14.00, -153.00)
+  SizeDelta=(-28.00, 74.00)
+  OffsetMin=(28.00, -227.00)
+  OffsetMax=(0.00, -153.00)
+  Rect=(x:-116.00, y:-74.00, width:232.00, height:74.00)
+  WorldCorners=(727.3, 374.9, 0.0) | (727.3, 427.1, 0.0) | (890.9, 427.1, 0.0) | (890.9, 374.9, 0.0)
+  TMP: Text=[Choose an item to view its details.], FontSize=15, Alignment=TopLeft, Color=RGBA(0.906, 0.875, 0.969, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel/UseButton
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, -235.00)
+  SizeDelta=(-28.00, 30.00)
+  OffsetMin=(14.00, -250.00)
+  OffsetMax=(-14.00, -220.00)
+  Rect=(x:-116.00, y:-15.00, width:232.00, height:30.00)
+  WorldCorners=(717.4, 358.7, 0.0) | (717.4, 379.8, 0.0) | (881.0, 379.8, 0.0) | (881.0, 358.7, 0.0)
+  Image: Color=RGBA(0.286, 0.196, 0.455, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel/UseButton/Label
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:-116.00, y:-15.00, width:232.00, height:30.00)
+  WorldCorners=(717.4, 358.7, 0.0) | (717.4, 379.8, 0.0) | (881.0, 379.8, 0.0) | (881.0, 358.7, 0.0)
+  TMP: Text=[USE], FontSize=13, Alignment=Center, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel/DropButton
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, -273.00)
+  SizeDelta=(-28.00, 30.00)
+  OffsetMin=(14.00, -288.00)
+  OffsetMax=(-14.00, -258.00)
+  Rect=(x:-116.00, y:-15.00, width:232.00, height:30.00)
+  WorldCorners=(717.4, 331.9, 0.0) | (717.4, 353.0, 0.0) | (881.0, 353.0, 0.0) | (881.0, 331.9, 0.0)
+  Image: Color=RGBA(0.286, 0.196, 0.455, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel/DropButton/Label
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:-116.00, y:-15.00, width:232.00, height:30.00)
+  WorldCorners=(717.4, 331.9, 0.0) | (717.4, 353.0, 0.0) | (881.0, 353.0, 0.0) | (881.0, 331.9, 0.0)
+  TMP: Text=[DROP 1], FontSize=13, Alignment=Center, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel/SplitButton
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, -311.00)
+  SizeDelta=(-28.00, 30.00)
+  OffsetMin=(14.00, -326.00)
+  OffsetMax=(-14.00, -296.00)
+  Rect=(x:-116.00, y:-15.00, width:232.00, height:30.00)
+  WorldCorners=(717.4, 305.1, 0.0) | (717.4, 326.2, 0.0) | (881.0, 326.2, 0.0) | (881.0, 305.1, 0.0)
+  Image: Color=RGBA(0.286, 0.196, 0.455, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+
+OBJECT: InventoryUI/InventoryPanel/ItemDetailsPanel/SplitButton/Label
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:-116.00, y:-15.00, width:232.00, height:30.00)
+  WorldCorners=(717.4, 305.1, 0.0) | (717.4, 326.2, 0.0) | (881.0, 326.2, 0.0) | (881.0, 305.1, 0.0)
+  TMP: Text=[SPLIT STACK], FontSize=13, Alignment=Center, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/SortButton
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(0.00, 0.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(144.00, 20.00)
+  SizeDelta=(90.00, 34.00)
+  OffsetMin=(99.00, 3.00)
+  OffsetMax=(189.00, 37.00)
+  Rect=(x:-45.00, y:-17.00, width:90.00, height:34.00)
+  WorldCorners=(361.3, 233.9, 0.0) | (361.3, 257.8, 0.0) | (424.8, 257.8, 0.0) | (424.8, 233.9, 0.0)
+  Image: Color=RGBA(0.286, 0.196, 0.455, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+
+OBJECT: InventoryUI/InventoryPanel/SortButton/Label
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:-45.00, y:-17.00, width:90.00, height:34.00)
+  WorldCorners=(361.3, 233.9, 0.0) | (361.3, 257.8, 0.0) | (424.8, 257.8, 0.0) | (424.8, 233.9, 0.0)
+  TMP: Text=[SORT], FontSize=13, Alignment=Center, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/InventoryPanel/CloseButton
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(0.00, 0.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(346.00, 20.00)
+  SizeDelta=(90.00, 34.00)
+  OffsetMin=(301.00, 3.00)
+  OffsetMax=(391.00, 37.00)
+  Rect=(x:-45.00, y:-17.00, width:90.00, height:34.00)
+  WorldCorners=(503.7, 233.9, 0.0) | (503.7, 257.8, 0.0) | (567.2, 257.8, 0.0) | (567.2, 233.9, 0.0)
+  Image: Color=RGBA(0.286, 0.196, 0.455, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+
+OBJECT: InventoryUI/InventoryPanel/CloseButton/Label
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:-45.00, y:-17.00, width:90.00, height:34.00)
+  WorldCorners=(503.7, 233.9, 0.0) | (503.7, 257.8, 0.0) | (567.2, 257.8, 0.0) | (567.2, 233.9, 0.0)
+  TMP: Text=[CLOSE], FontSize=13, Alignment=Center, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/PlayerHealthHUD
+Active=True
+  AnchorMin=(0.50, 0.50)
+  AnchorMax=(0.50, 0.50)
+  Pivot=(0.00, 0.00)
+  AnchoredPosition=(-135.52, 278.00)
+  SizeDelta=(273.00, 160.00)
+  OffsetMin=(-135.52, 278.00)
+  OffsetMax=(137.48, 438.00)
+  Rect=(x:0.00, y:0.00, width:273.00, height:160.00)
+  WorldCorners=(520.3, 614.7, 0.0) | (520.3, 727.5, 0.0) | (712.8, 727.5, 0.0) | (712.8, 614.7, 0.0)
+  Image: Color=RGBA(0.090, 0.082, 0.133, 1.000), Sprite=null, Enabled=True, Raycast=True
+
+OBJECT: InventoryUI/PlayerHealthHUD/HealthTitle
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 1.00)
+  AnchoredPosition=(12.00, -8.00)
+  SizeDelta=(-24.00, 26.00)
+  OffsetMin=(24.00, -34.00)
+  OffsetMax=(0.00, -8.00)
+  Rect=(x:-124.50, y:-26.00, width:249.00, height:26.00)
+  WorldCorners=(537.2, 703.5, 0.0) | (537.2, 721.9, 0.0) | (712.8, 721.9, 0.0) | (712.8, 703.5, 0.0)
+  TMP: Text=[PLAYER HEALTH], FontSize=16, Alignment=Left, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/PlayerHealthHUD/HealthText
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 1.00)
+  AnchoredPosition=(12.00, -38.00)
+  SizeDelta=(-24.00, 24.00)
+  OffsetMin=(24.00, -62.00)
+  OffsetMax=(0.00, -38.00)
+  Rect=(x:-124.50, y:-24.00, width:249.00, height:24.00)
+  WorldCorners=(537.2, 683.8, 0.0) | (537.2, 700.7, 0.0) | (712.8, 700.7, 0.0) | (712.8, 683.8, 0.0)
+  TMP: Text=[HP: 100 / 100], FontSize=14, Alignment=Left, Color=RGBA(0.906, 0.875, 0.969, 1.000), Wrapping=Normal
+
+OBJECT: InventoryUI/PlayerHealthHUD/HealthBar
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(12.00, -78.00)
+  SizeDelta=(-24.00, 18.00)
+  OffsetMin=(24.00, -87.00)
+  OffsetMax=(0.00, -69.00)
+  Rect=(x:-124.50, y:-9.00, width:249.00, height:18.00)
+  WorldCorners=(537.2, 666.2, 0.0) | (537.2, 678.9, 0.0) | (712.8, 678.9, 0.0) | (712.8, 666.2, 0.0)
+  Image: Color=RGBA(0.486, 0.325, 0.710, 1.000), Sprite=null, Enabled=True, Raycast=True
+
+OBJECT: InventoryUI/PlayerHealthHUD/DamageTestButton
+Active=True
+  AnchorMin=(0.00, 1.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(12.00, -124.00)
+  SizeDelta=(-24.00, 32.00)
+  OffsetMin=(24.00, -140.00)
+  OffsetMax=(0.00, -108.00)
+  Rect=(x:-124.50, y:-16.00, width:249.00, height:32.00)
+  WorldCorners=(537.2, 628.8, 0.0) | (537.2, 651.3, 0.0) | (712.8, 651.3, 0.0) | (712.8, 628.8, 0.0)
+  Image: Color=RGBA(0.286, 0.196, 0.455, 1.000), Sprite=null, Enabled=True, Raycast=True
+  Button: Interactable=True, Transition=ColorTint
+
+OBJECT: InventoryUI/PlayerHealthHUD/DamageTestButton/Label
+Active=True
+  AnchorMin=(0.00, 0.00)
+  AnchorMax=(1.00, 1.00)
+  Pivot=(0.50, 0.50)
+  AnchoredPosition=(0.00, 0.00)
+  SizeDelta=(0.00, 0.00)
+  OffsetMin=(0.00, 0.00)
+  OffsetMax=(0.00, 0.00)
+  Rect=(x:-124.50, y:-16.00, width:249.00, height:32.00)
+  WorldCorners=(537.2, 628.8, 0.0) | (537.2, 651.3, 0.0) | (712.8, 651.3, 0.0) | (712.8, 628.8, 0.0)
+  TMP: Text=[TAKE 25 DAMAGE (TEST)], FontSize=13, Alignment=Center, Color=RGBA(1.000, 1.000, 1.000, 1.000), Wrapping=Normal
+

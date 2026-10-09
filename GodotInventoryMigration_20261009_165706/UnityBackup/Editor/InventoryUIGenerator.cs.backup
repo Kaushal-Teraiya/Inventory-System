@@ -1,0 +1,319 @@
+﻿using UnityEditor;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using TMPro;
+using InventorySystem.UI;
+using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem;
+
+public static class InventoryUIGenerator
+{
+    private const int SlotCount = 24;
+    private const int Columns = 5;
+
+    private static readonly Color Background = Hex("#11131B");
+    private static readonly Color PanelColor = Hex("#1B1E29");
+    private static readonly Color SlotColor = Hex("#292D3B");
+    private static readonly Color HoverColor = Hex("#3B4055");
+    private static readonly Color SelectedColor = Hex("#554579");
+    private static readonly Color Accent = Hex("#B7A0FF");
+    private static readonly Color TextColor = Hex("#F0F1FA");
+    private static readonly Color MutedText = Hex("#A0A5BA");
+
+    [MenuItem("Inventory System/Generate Clean Inventory UI")]
+    public static void Generate()
+    {
+        var existing = GameObject.Find("InventoryUI");
+
+        if (existing != null &&
+            !EditorUtility.DisplayDialog(
+                "Regenerate Inventory UI",
+                "This replaces the existing InventoryUI object in the active scene. Save your scene first if you need its current layout.",
+                "Replace UI",
+                "Cancel"))
+            return;
+
+        Undo.IncrementCurrentGroup();
+        int group = Undo.GetCurrentGroup();
+        Undo.SetCurrentGroupName("Generate Inventory UI");
+
+        if (existing != null)
+            Undo.DestroyObjectImmediate(existing);
+
+        var root = new GameObject(
+            "InventoryUI",
+            typeof(RectTransform),
+            typeof(Canvas),
+            typeof(CanvasScaler),
+            typeof(GraphicRaycaster),
+            typeof(InventoryUI));
+
+        Undo.RegisterCreatedObjectUndo(root, "Create Inventory UI");
+
+        var canvas = root.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.pixelPerfect = false;
+
+        var scaler = root.GetComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920, 1080);
+        scaler.matchWidthOrHeight = 0.5f;
+
+        var rootRect = root.GetComponent<RectTransform>();
+        Stretch(rootRect);
+
+        CreateEventSystem();
+
+        var panel = MakeRect("InventoryPanel", root.transform);
+        SetCentered(panel, new Vector2(-149, 0), new Vector2(780, 650));
+        var panelImage = panel.gameObject.AddComponent<Image>();
+        panelImage.color = PanelColor;
+        panelImage.raycastTarget = false;
+
+        AddOutline(panel.gameObject, Hex("#343849"), 1.2f);
+        AddShadow(panel.gameObject);
+
+        MakeText(
+            "Title", panel, "INVENTORY", 29, FontStyles.Bold,
+            TextAlignmentOptions.Left, TextColor,
+            new Vector2(30, -25), new Vector2(450, 42),
+            new Vector2(0, 1), new Vector2(0, 1));
+
+        MakeText(
+            "Subtitle", panel, "ITEMS  /  EQUIPMENT", 12, FontStyles.Bold,
+            TextAlignmentOptions.Left, MutedText,
+            new Vector2(32, -66), new Vector2(450, 22),
+            new Vector2(0, 1), new Vector2(0, 1));
+
+        var accent = MakeRect("HeaderAccent", panel);
+        SetAnchored(accent, new Vector2(30, -91), new Vector2(48, 3),
+            new Vector2(0, 1), new Vector2(0, 1));
+        accent.gameObject.AddComponent<Image>().color = Accent;
+
+        var grid = MakeRect("SlotGrid", panel);
+        SetAnchored(grid, new Vector2(28, -108), new Vector2(480, 500),
+            new Vector2(0, 1), new Vector2(0, 1));
+
+        var gridLayout = grid.gameObject.AddComponent<GridLayoutGroup>();
+        gridLayout.cellSize = new Vector2(84, 84);
+        gridLayout.spacing = new Vector2(8, 8);
+        gridLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
+        gridLayout.startAxis = GridLayoutGroup.Axis.Horizontal;
+        gridLayout.childAlignment = TextAnchor.UpperLeft;
+        gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        gridLayout.constraintCount = Columns;
+        gridLayout.padding = new RectOffset(4, 4, 4, 4);
+
+        for (int i = 0; i < SlotCount; i++)
+            MakeSlot(grid, i);
+
+        var divider = MakeRect("DetailsDivider", panel);
+        SetAnchored(divider, new Vector2(528, -108), new Vector2(1, 500),
+            new Vector2(0, 1), new Vector2(0, 1));
+        divider.gameObject.AddComponent<Image>().color = Hex("#343849");
+
+        // InventoryUI.BuildDetailsPanel owns the contents of this panel at runtime.
+        // It positions this container immediately to the right of InventoryPanel.
+        var details = MakeRect("ItemDetailsPanel", panel);
+        SetCentered(details, Vector2.zero, new Vector2(280, 330));
+        details.gameObject.AddComponent<Image>().color = Background;
+
+        AddOutline(details.gameObject, Hex("#343849"), 1f);
+
+        MakeText(
+            "DetailsPlaceholder", details, "SELECT AN ITEM", 14, FontStyles.Bold,
+            TextAlignmentOptions.Center, MutedText,
+            Vector2.zero, new Vector2(240, 30),
+            new Vector2(.5f, .5f), new Vector2(.5f, .5f));
+
+        // Runtime InventoryUI replaces the placeholder with its real details UI.
+        EditorUtility.SetDirty(root);
+        Selection.activeGameObject = root;
+
+        Undo.CollapseUndoOperations(group);
+        Debug.Log("Clean Inventory UI generated. Save the active scene.");
+    }
+
+    private static void MakeSlot(Transform parent, int index)
+    {
+        var slot = MakeRect("Slot_" + index, parent);
+        Stretch(slot);
+
+        var background = slot.gameObject.AddComponent<Image>();
+        background.color = SlotColor;
+        background.raycastTarget = true;
+
+        var button = slot.gameObject.AddComponent<Button>();
+        button.targetGraphic = background;
+        button.transition = Selectable.Transition.ColorTint;
+
+        var colors = button.colors;
+        colors.normalColor = SlotColor;
+        colors.highlightedColor = HoverColor;
+        colors.pressedColor = SelectedColor;
+        colors.selectedColor = SelectedColor;
+        colors.disabledColor = Hex("#20232D");
+        colors.colorMultiplier = 1f;
+        colors.fadeDuration = 0.08f;
+        button.colors = colors;
+
+        slot.gameObject.AddComponent<InventorySlotUI>();
+
+        var icon = MakeRect("Icon", slot);
+        Stretch(icon);
+        var iconRect = icon.GetComponent<RectTransform>();
+        iconRect.anchorMin = new Vector2(.12f, .12f);
+        iconRect.anchorMax = new Vector2(.88f, .88f);
+        iconRect.offsetMin = Vector2.zero;
+        iconRect.offsetMax = Vector2.zero;
+
+        var iconImage = icon.gameObject.AddComponent<Image>();
+        iconImage.preserveAspect = true;
+        iconImage.raycastTarget = false;
+        iconImage.enabled = false;
+
+        var selection = MakeRect("Selection", slot);
+        Stretch(selection);
+
+        var selectionImage = selection.gameObject.AddComponent<Image>();
+        selectionImage.color = new Color(0.72f, 0.60f, 1f, 0.20f);
+        selectionImage.raycastTarget = false;
+        selection.gameObject.SetActive(false);
+
+        var quantity = MakeRect("Quantity", slot);
+        Stretch(quantity);
+
+        var quantityText = quantity.gameObject.AddComponent<TextMeshProUGUI>();
+        quantityText.text = string.Empty;
+        quantityText.fontSize = 15;
+        quantityText.fontStyle = FontStyles.Bold;
+        quantityText.alignment = TextAlignmentOptions.BottomRight;
+        quantityText.color = TextColor;
+        quantityText.raycastTarget = false;
+        quantityText.margin = new Vector4(3, 3, 6, 4);
+       // quantityText.ena = false;
+
+        AddOutline(slot.gameObject, Hex("#3B4050"), 1f);
+    }
+
+    private static RectTransform MakeRect(string name, Transform parent)
+    {
+        var go = new GameObject(name, typeof(RectTransform));
+        Undo.RegisterCreatedObjectUndo(go, "Create " + name);
+        go.transform.SetParent(parent, false);
+        return go.GetComponent<RectTransform>();
+    }
+
+    private static void MakeText(
+        string name,
+        Transform parent,
+        string value,
+        float size,
+        FontStyles style,
+        TextAlignmentOptions alignment,
+        Color color,
+        Vector2 position,
+        Vector2 dimensions,
+        Vector2 anchorMin,
+        Vector2 anchorMax)
+    {
+        var rect = MakeRect(name, parent);
+        SetAnchored(rect, position, dimensions, anchorMin, anchorMax);
+
+        var text = rect.gameObject.AddComponent<TextMeshProUGUI>();
+        text.text = value;
+        text.fontSize = size;
+        text.fontStyle = style;
+        text.alignment = alignment;
+        text.color = color;
+        text.raycastTarget = false;
+       // text.enableWordWrapping = false;
+    }
+
+    private static void Stretch(RectTransform rect)
+    {
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.pivot = new Vector2(.5f, .5f);
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+        rect.localScale = Vector3.one;
+        rect.localRotation = Quaternion.identity;
+    }
+
+    private static void SetCentered(
+        RectTransform rect, Vector2 position, Vector2 size)
+    {
+        rect.anchorMin = new Vector2(.5f, .5f);
+        rect.anchorMax = new Vector2(.5f, .5f);
+        rect.pivot = new Vector2(.5f, .5f);
+        rect.anchoredPosition = position;
+        rect.sizeDelta = size;
+        rect.localScale = Vector3.one;
+        rect.localRotation = Quaternion.identity;
+    }
+
+    private static void SetAnchored(
+        RectTransform rect,
+        Vector2 position,
+        Vector2 size,
+        Vector2 anchorMin,
+        Vector2 anchorMax)
+    {
+        rect.anchorMin = anchorMin;
+        rect.anchorMax = anchorMax;
+        rect.pivot = anchorMin == anchorMax
+            ? anchorMin
+            : new Vector2(.5f, .5f);
+        rect.anchoredPosition = position;
+        rect.sizeDelta = size;
+        rect.localScale = Vector3.one;
+        rect.localRotation = Quaternion.identity;
+    }
+
+    private static void AddOutline(GameObject target, Color color, float distance)
+    {
+        var outline = target.AddComponent<Outline>();
+        outline.effectColor = color;
+        outline.effectDistance = new Vector2(distance, -distance);
+        outline.useGraphicAlpha = true;
+    }
+
+    private static void AddShadow(GameObject target)
+    {
+        var shadow = target.AddComponent<Shadow>();
+        shadow.effectColor = new Color(0, 0, 0, .35f);
+        shadow.effectDistance = new Vector2(0, -5);
+        shadow.useGraphicAlpha = true;
+    }
+
+    private static void CreateEventSystem()
+    {
+        var eventSystem = Object.FindAnyObjectByType<EventSystem>();
+
+        if (eventSystem == null)
+        {
+            var go = new GameObject(
+                "EventSystem",
+                typeof(EventSystem),
+                typeof(InputSystemUIInputModule));
+
+            Undo.RegisterCreatedObjectUndo(go, "Create EventSystem");
+            return;
+        }
+
+        var oldModule = eventSystem.GetComponent<StandaloneInputModule>();
+        if (oldModule != null)
+            Undo.DestroyObjectImmediate(oldModule);
+
+        if (eventSystem.GetComponent<InputSystemUIInputModule>() == null)
+            Undo.AddComponent<InputSystemUIInputModule>(eventSystem.gameObject);
+    }
+
+    private static Color Hex(string value)
+    {
+        ColorUtility.TryParseHtmlString(value, out var color);
+        return color;
+    }
+}

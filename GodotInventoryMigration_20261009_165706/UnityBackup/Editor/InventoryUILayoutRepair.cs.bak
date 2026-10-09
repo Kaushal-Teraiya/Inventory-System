@@ -1,0 +1,168 @@
+﻿using UnityEditor;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public static class InventoryUILayoutRepair
+{
+    [MenuItem("Inventory System/Repair Inventory Layout")]
+    public static void Repair()
+    {
+        var root = GameObject.Find("InventoryUI");
+        if (root == null)
+        {
+            Debug.LogError("InventoryUI not found.");
+            return;
+        }
+
+        var panelTransform = root.transform.Find("InventoryPanel");
+        if (panelTransform == null)
+        {
+            Debug.LogError("InventoryPanel not found.");
+            return;
+        }
+
+        var panel = panelTransform.GetComponent<RectTransform>();
+        Undo.RecordObject(panel, "Repair Inventory Layout");
+        panel.anchorMin = panel.anchorMax = new Vector2(.5f, .5f);
+        panel.pivot = new Vector2(.5f, .5f);
+        panel.anchoredPosition = Vector2.zero;
+        panel.sizeDelta = new Vector2(1120, 700);
+
+        var background = panel.GetComponent<Image>();
+        if (background != null)
+            background.color = new Color(.035f, .045f, .065f, .99f);
+
+        var titleTransform = panel.Find("Title");
+        if (titleTransform != null)
+        {
+            var r = titleTransform.GetComponent<RectTransform>();
+            r.anchorMin = r.anchorMax = new Vector2(.5f, 1);
+            r.pivot = new Vector2(.5f, 1);
+            r.anchoredPosition = new Vector2(0, -24);
+            r.sizeDelta = new Vector2(1000, 52);
+
+            var t = titleTransform.GetComponent<TMP_Text>();
+            if (t != null)
+            {
+                t.text = "INVENTORY";
+                t.fontSize = 30;
+                t.fontStyle = FontStyles.Bold;
+                t.alignment = TextAlignmentOptions.Center;
+                t.color = new Color(.9f, .94f, 1f);
+                t.characterSpacing = 3;
+                t.raycastTarget = false;
+            }
+        }
+
+        var gridTransform = panel.Find("SlotGrid");
+        if (gridTransform != null)
+        {
+            var r = gridTransform.GetComponent<RectTransform>();
+            r.anchorMin = r.anchorMax = new Vector2(0, 1);
+            r.pivot = new Vector2(0, 1);
+            r.anchoredPosition = new Vector2(28, -105);
+            r.sizeDelta = new Vector2(510, 500);
+
+            var grid = gridTransform.GetComponent<GridLayoutGroup>();
+            if (grid != null)
+            {
+                grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                grid.constraintCount = 5;
+                grid.cellSize = new Vector2(86, 86);
+                grid.spacing = new Vector2(10, 10);
+                grid.padding = new RectOffset(4, 4, 4, 4);
+                grid.childAlignment = TextAnchor.UpperLeft;
+            }
+        }
+
+        // Put the details panel inside the main window.
+        var details = panel.Find("ItemDetailsPanel");
+        if (details != null)
+        {
+            var r = details.GetComponent<RectTransform>();
+            r.anchorMin = r.anchorMax = new Vector2(1, .5f);
+            r.pivot = new Vector2(1, .5f);
+            r.anchoredPosition = new Vector2(-28, -10);
+            r.sizeDelta = new Vector2(490, 510);
+
+            var bg = details.GetComponent<Image>();
+            if (bg != null)
+                bg.color = new Color(.065f, .08f, .115f, 1f);
+
+            // Remove overlapping non-button text; rebuild one clean title
+            // and one description while preserving existing buttons.
+            for (int i = details.childCount - 1; i >= 0; i--)
+            {
+                var child = details.GetChild(i);
+                if (child.GetComponent<Button>() != null)
+                    continue;
+                if (child.GetComponentInChildren<Button>(true) != null)
+                    continue;
+                Undo.DestroyObjectImmediate(child.gameObject);
+            }
+
+            var heading = new GameObject(
+                "DetailsHeading",
+                typeof(RectTransform),
+                typeof(TextMeshProUGUI));
+            heading.transform.SetParent(details, false);
+            var hr = heading.GetComponent<RectTransform>();
+            hr.anchorMin = hr.anchorMax = new Vector2(0, 1);
+            hr.pivot = new Vector2(0, 1);
+            hr.anchoredPosition = new Vector2(24, -24);
+            hr.sizeDelta = new Vector2(430, 44);
+            var ht = heading.GetComponent<TMP_Text>();
+            ht.text = "ITEM DETAILS";
+            ht.fontSize = 22;
+            ht.fontStyle = FontStyles.Bold;
+            ht.color = new Color(.86f, .91f, 1f);
+            ht.raycastTarget = false;
+
+            var description = new GameObject(
+                "DetailsDescription",
+                typeof(RectTransform),
+                typeof(TextMeshProUGUI));
+            description.transform.SetParent(details, false);
+            var dr = description.GetComponent<RectTransform>();
+            dr.anchorMin = dr.anchorMax = new Vector2(0, 1);
+            dr.pivot = new Vector2(0, 1);
+            dr.anchoredPosition = new Vector2(24, -82);
+            dr.sizeDelta = new Vector2(430, 180);
+            var dt = description.GetComponent<TMP_Text>();
+            dt.text = "Select an item to see its details.";
+            dt.fontSize = 17;
+            dt.color = new Color(.72f, .78f, .88f);
+            dt.textWrappingMode = TextWrappingModes.Normal;
+            dt.raycastTarget = false;
+
+            // Arrange action buttons in a tidy vertical stack.
+            float y = -300;
+            foreach (var button in details.GetComponentsInChildren<Button>(true))
+            {
+                if (button.transform == details) continue;
+                var br = button.GetComponent<RectTransform>();
+                br.anchorMin = br.anchorMax = new Vector2(.5f, 1);
+                br.pivot = new Vector2(.5f, 1);
+                br.anchoredPosition = new Vector2(0, y);
+                br.sizeDelta = new Vector2(400, 42);
+                y -= 54;
+            }
+        }
+
+        // Ensure the grid slots have consistent dimensions and spacing.
+        foreach (var slot in panel.GetComponentsInChildren<InventorySystem.UI.InventorySlotUI>(true))
+        {
+            var r = slot.GetComponent<RectTransform>();
+            if (r != null)
+                r.sizeDelta = new Vector2(86, 86);
+
+            var image = slot.GetComponent<Image>();
+            if (image != null)
+                image.color = new Color(.075f, .09f, .125f, 1f);
+        }
+
+        EditorUtility.SetDirty(root);
+        Debug.Log("Inventory layout repaired. Review the UI in Play mode.");
+    }
+}

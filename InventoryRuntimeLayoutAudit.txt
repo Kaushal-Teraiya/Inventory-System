@@ -1,0 +1,115 @@
+=== Runtime UI object creation and layout ===
+
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryContextMenu.cs:6:{
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryContextMenu.cs:7:    public sealed class InventoryContextMenu : MonoBehaviour
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryContextMenu.cs:8:    {
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryContextMenu.cs:9:        [SerializeField] private InventoryUI inventoryUI;
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:55:
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:56:            BuildDetailsPanel();
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:57:
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:58:            inventory.SlotChanged += OnSlotChanged;
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:71:
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:72:        private void BuildDetailsPanel()
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:73:        {
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:74:            var panel = transform.Find("InventoryPanel");
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:75:            if (panel == null) panel = transform;
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:76:
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:77:            var existing = panel.Find("ItemDetailsPanel");
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:78:            GameObject box;
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:79:
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:82:            {
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:83:                box = new GameObject("ItemDetailsPanel", typeof(RectTransform), typeof(Image));
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:84:                box.transform.SetParent(panel, false);
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:85:            }
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:86:
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:90:            rect.pivot = new Vector2(0, 0.5f);
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:91:            rect.anchoredPosition = new Vector2(18, 0);
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:92:            rect.sizeDelta = new Vector2(280, 330);
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:93:            box.GetComponent<Image>().color = new Color(.08f,.07f,.13f,.98f);
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:94:
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:97:
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:98:            useButton = MakeButton(box.transform, "UseButton", "USE", -155);
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:99:            dropButton = MakeButton(box.transform, "DropButton", "DROP 1", -205);
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:100:            splitButton = MakeButton(box.transform, "SplitButton", "SPLIT STACK", -255);
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:101:            closeButton = MakeButton(box.transform, "CloseButton", "CLOSE", -300);
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:102:
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:103:            useButton.onClick.AddListener(UseSelectedItem);
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:111:        {
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:112:            var go = new GameObject(name, typeof(RectTransform), typeof(TextMeshProUGUI));
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:113:            go.transform.SetParent(parent, false);
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:114:            var r = go.GetComponent<RectTransform>();
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:115:            r.anchorMin = amin; r.anchorMax = amax; r.pivot = new Vector2(.5f, 1);
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:116:            r.anchoredPosition = pos; r.sizeDelta = dimensions;
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:117:            var text = go.GetComponent<TMP_Text>();
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:118:            text.text = value; text.fontSize = size; text.color = Color.white;
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:123:
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:124:        private static Button MakeButton(Transform parent, string name, string label, float y)
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:125:        {
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:126:            var go = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:127:            go.transform.SetParent(parent, false);
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:128:            var r = go.GetComponent<RectTransform>();
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:129:            r.anchorMin = new Vector2(.5f, 1); r.anchorMax = new Vector2(.5f, 1);
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:130:            r.pivot = new Vector2(.5f, 1); r.anchoredPosition = new Vector2(0, y);
+> C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:131:            r.sizeDelta = new Vector2(220, 36);
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:132:            go.GetComponent<Image>().color = new Color(.30f,.20f,.48f,1);
+  C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs:133:            var button = go.GetComponent<Button>();
+
+
+
+
+=== All editor scripts that modify inventory layout ===
+
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUIGenerator.cs:7:public static class InventoryUIGenerator
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUIGenerator.cs:12:        var existing = GameObject.Find("InventoryUI");
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUIGenerator.cs:16:                "Replace the existing InventoryUI GameObject?",
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUIGenerator.cs:23:        var root = new GameObject("InventoryUI",
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUIGenerator.cs:26:            typeof(InventoryUI));
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUIGenerator.cs:36:        var panel = Create("InventoryPanel", root.transform);
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUIGenerator.cs:48:        var grid = Create("SlotGrid", panel.transform);
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUIGenerator.cs:86:        var details = Create("ItemDetailsPanel", panel.transform);
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUILayoutRepair.cs:6:public static class InventoryUILayoutRepair
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUILayoutRepair.cs:11:        var root = GameObject.Find("InventoryUI");
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUILayoutRepair.cs:12:        if (root == null) { Debug.LogError("InventoryUI not found."); return; }
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUILayoutRepair.cs:14:        var panelT = root.transform.Find("InventoryPanel");
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUILayoutRepair.cs:15:        if (panelT == null) { Debug.LogError("InventoryPanel not found."); return; }
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUILayoutRepair.cs:28:        string[] obsolete = { "HeaderAccent", "HeaderAccentGlow", "InventoryFooter" };
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUILayoutRepair.cs:57:        var gridT = panel.Find("SlotGrid");
+C:\Users\kaushal\Inventory System\Assets\Editor\InventoryUILayoutRepair.cs:79:        var details = panel.Find("ItemDetailsPanel");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryContextMenuSetupEditor.cs:12:        var root = GameObject.Find("InventoryUI");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryContextMenuSetupEditor.cs:16:            Debug.LogError("InventoryUI not found.");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:6:public static class InventoryUIBeautyPassEditor
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:11:        var root = GameObject.Find("InventoryUI");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:15:            Debug.LogError("InventoryUI not found.");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:19:        var panel = root.transform.Find("InventoryPanel");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:23:            Debug.LogError("InventoryPanel not found.");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:64:        CreateAccent(panel, "HeaderAccent", 0f, -92f, 760f, 3f);
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:65:        CreateAccent(panel, "HeaderAccentGlow", 0f, -92f, 420f, 7f);
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:68:        var grid = panel.Find("SlotGrid");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:243:        var existing = panel.Find("InventoryFooter");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIBeautyPassEditor.cs:249:            "InventoryFooter",
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIContainmentFixEditor.cs:5:public static class InventoryUIContainmentFixEditor
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIContainmentFixEditor.cs:10:        var root = GameObject.Find("InventoryUI");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIContainmentFixEditor.cs:14:            Debug.LogError("InventoryUI not found.");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIContainmentFixEditor.cs:18:        var panel = root.transform.Find("InventoryPanel");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIContainmentFixEditor.cs:22:            Debug.LogError("InventoryPanel not found.");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIContainmentFixEditor.cs:37:        var grid = panel.Find("SlotGrid");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIContainmentFixEditor.cs:80:        var footer = panel.Find("InventoryFooter");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIFixStyleEditor.cs:6:public static class InventoryUIFixStyleEditor
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIFixStyleEditor.cs:11:        var root = GameObject.Find("InventoryUI");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIFixStyleEditor.cs:15:            Debug.LogError("InventoryUI not found.");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIFixStyleEditor.cs:19:        var panel = root.transform.Find("InventoryPanel");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIFixStyleEditor.cs:31:        var title = root.transform.Find("InventoryPanel/Title");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIFixStyleEditor.cs:52:        var grid = root.transform.Find("InventoryPanel/SlotGrid");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIInputFixEditor.cs:7:public static class InventoryUIInputFixEditor
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIPolishEditor.cs:6:public static class InventoryUIPolishEditor
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIPolishEditor.cs:11:        var root = GameObject.Find("InventoryUI");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIPolishEditor.cs:15:            Debug.LogError("InventoryUI not found.");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIPolishEditor.cs:37:        var panel = root.transform.Find("InventoryPanel");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIPolishEditor.cs:54:        var title = root.transform.Find("InventoryPanel/Title");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUIPolishEditor.cs:74:        var grid = root.transform.Find("InventoryPanel/SlotGrid");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUISetupEditor.cs:6:public static class InventoryUISetupEditor
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUISetupEditor.cs:11:        var root = GameObject.Find("InventoryUI");
+C:\Users\kaushal\Inventory System\Assets\InventorySystem\Editor\InventoryUISetupEditor.cs:15:            Debug.LogError("InventoryUI not found.");
+
+
+

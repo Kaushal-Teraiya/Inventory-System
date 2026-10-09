@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.Items.ItemDefinition
   itemId: health_potion
   displayName: Health Potion
-  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: -728488644960612398, guid: f54d77caacb1c5c4597600c0464d9337, type: 3}
   maxStackSize: 10
-  weight: 0
+  weight: 2
+  useEffect: {fileID: 11400000, guid: f361de2cc3c825f479bb4051d1e40b24, type: 2}

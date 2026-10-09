@@ -1,0 +1,3 @@
+Inventory generator replaced.
+Backups created for generator and InventoryUI.
+Next: allow Unity to compile, then use Inventory System > Generate Inventory UI.

@@ -1,0 +1,6 @@
+﻿Updated runtime files:
+- C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUI.cs
+- C:\Users\kaushal\Inventory System\Assets\InventorySystem\Runtime\UI\InventoryUIMouseInput.cs
+
+Backups saved as .bak files.
+Important: Use currently logs that no item-use effect is configured; it does not consume the item.

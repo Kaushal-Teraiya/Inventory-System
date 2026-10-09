@@ -1,0 +1,25 @@
+﻿Unity UI icon download
+Destination: C:\Users\kaushal\Inventory System\Assets\UI Icons\Game Icons
+Source: https://game-icons.net/
+License: CC BY 3.0; see attribution requirements.
+
+OK      HealthPotion.png
+OK      Shield.png
+OK      Sword.png
+FAILED  Backpack - The remote server returned an error: (404) Not Found.
+FAILED  GoldBar - The remote server returned an error: (404) Not Found.
+FAILED  Coins - The remote server returned an error: (404) Not Found.
+FAILED  Meat - The remote server returned an error: (404) Not Found.
+OK      Key.png
+OK      Scroll.png
+OK      Magic.png
+FAILED  Boots - The remote server returned an error: (404) Not Found.
+FAILED  Axe - The remote server returned an error: (404) Not Found.
+FAILED  Bow - The remote server returned an error: (404) Not Found.
+FAILED  Ring - The remote server returned an error: (404) Not Found.
+FAILED  Gem - The remote server returned an error: (404) Not Found.
+OK      Apple.png
+OK      Book.png
+FAILED  Helmet - The remote server returned an error: (404) Not Found.
+FAILED  Gloves - The remote server returned an error: (404) Not Found.
+OK      Crystal.png

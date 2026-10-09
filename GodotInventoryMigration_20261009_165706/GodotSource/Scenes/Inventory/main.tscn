@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bmjuxfpdieg6j"]
+
+[ext_resource type="PackedScene" path="res://Scenes/Inventory/InventoryUI.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://degqmhlwglleb" path="res://Scripts/Inventory/Items/ItemDefinition.cs" id="2_cecgx"]
+[ext_resource type="Texture2D" uid="uid://dxtmkv7huftji" path="res://icon.svg" id="3_po37l"]
+[ext_resource type="Script" uid="uid://l7sqoiosxg5x" path="res://Scripts/Inventory/Items/HealingItemEffect.cs" id="4_c65dj"]
+[ext_resource type="Texture2D" uid="uid://b40jfnsjoetyg" path="res://Assets/Icons/Sword.png" id="5_sqce4"]
+[ext_resource type="Script" uid="uid://dyf11f4l67luj" path="res://Scripts/Inventory/Items/DamageItemEffect.cs" id="6_g3hek"]
+
+[sub_resource type="Resource" id="Resource_sqce4"]
+script = ExtResource("4_c65dj")
+metadata/_custom_type_script = "uid://l7sqoiosxg5x"
+
+[sub_resource type="Resource" id="Resource_t28l3"]
+script = ExtResource("2_cecgx")
+ItemId = "health"
+DisplayName = "Health Potion"
+Icon = ExtResource("3_po37l")
+Weight = 2.0
+UseEffect = SubResource("Resource_sqce4")
+MaxStackSize = 10
+metadata/_custom_type_script = "uid://degqmhlwglleb"
+
+[sub_resource type="Resource" id="Resource_c65dj"]
+script = ExtResource("6_g3hek")
+metadata/_custom_type_script = "uid://dyf11f4l67luj"
+
+[sub_resource type="Resource" id="Resource_7o2gv"]
+script = ExtResource("2_cecgx")
+ItemId = "sword"
+DisplayName = "Sword"
+Icon = ExtResource("5_sqce4")
+UseEffect = SubResource("Resource_c65dj")
+MaxStackSize = 5
+metadata/_custom_type_script = "uid://degqmhlwglleb"
+
+[node name="Main" type="Node3D" unique_id=789362972]
+
+[node name="InventoryUI" parent="." unique_id=1324814628 instance=ExtResource("1_ig7tw")]
+StartingItems = Array[ExtResource("2_cecgx")]([SubResource("Resource_t28l3"), SubResource("Resource_7o2gv")])

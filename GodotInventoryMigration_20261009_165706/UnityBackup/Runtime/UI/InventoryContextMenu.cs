@@ -1,0 +1,207 @@
+﻿using InventorySystem.Inventory;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace InventorySystem.UI
+{
+    public sealed class InventoryContextMenu : MonoBehaviour
+    {
+        [SerializeField] private InventoryUI inventoryUI;
+
+        private int slotIndex = -1;
+
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void Initialize(InventoryUI ui)
+        {
+            inventoryUI = ui;
+        }
+
+        public int SlotIndex => slotIndex;
+
+        public void Open(int index)
+        {
+            if (inventoryUI == null)
+                return;
+
+            var inventory = inventoryUI.Inventory;
+
+            if (index < 0 || index >= inventory.Capacity)
+                return;
+
+            var slot = inventory.GetSlot(index);
+
+            if (slot == null || slot.IsEmpty)
+                return;
+
+            slotIndex = index;
+
+            inventoryUI.SelectSlot(index);
+
+            if (Mouse.current != null)
+                transform.position =
+                    Mouse.current.position.ReadValue();
+
+            gameObject.SetActive(true);
+
+            Debug.Log(
+                $"Context Menu opened for Slot {slotIndex}");
+        }
+
+        public void Use()
+        {
+            if (!TryGetSelectedSlot(out _))
+            {
+                Close();
+                return;
+            }
+
+            Debug.Log(
+                $"USE requested for Slot {slotIndex}");
+
+            var result =
+                inventoryUI.Inventory.RemoveFromSlot(
+                    slotIndex,
+                    1);
+
+            Debug.Log(
+                result.Succeeded
+                    ? $"USE SUCCESS: Slot {slotIndex}"
+                    : $"USE FAILED: Slot {slotIndex}, {result.Failure}");
+
+            if (result.Succeeded)
+                RefreshUI();
+
+            Close();
+        }
+
+        public void Drop()
+        {
+            if (!TryGetSelectedSlot(out var slot))
+            {
+                Close();
+                return;
+            }
+
+            int quantity = slot.Stack.Quantity;
+
+            Debug.Log(
+                $"DROP requested for Slot {slotIndex}, Quantity {quantity}");
+
+            var result =
+                inventoryUI.Inventory.RemoveFromSlot(
+                    slotIndex,
+                    quantity);
+
+            Debug.Log(
+                result.Succeeded
+                    ? $"DROP SUCCESS: Slot {slotIndex}"
+                    : $"DROP FAILED: Slot {slotIndex}, {result.Failure}");
+
+            if (result.Succeeded)
+                RefreshUI();
+
+            Close();
+        }
+
+        public void Split()
+        {
+            if (!TryGetSelectedSlot(out var source))
+            {
+                Close();
+                return;
+            }
+
+            int quantity =
+                source.Stack.Quantity / 2;
+
+            if (quantity <= 0)
+            {
+                Debug.Log(
+                    $"SPLIT FAILED: Slot {slotIndex} has insufficient quantity.");
+
+                Close();
+                return;
+            }
+
+            int targetIndex = -1;
+
+            for (int i = 0;
+                 i < inventoryUI.Inventory.Capacity;
+                 i++)
+            {
+                if (i == slotIndex)
+                    continue;
+
+                var target =
+                    inventoryUI.Inventory.GetSlot(i);
+
+                if (target != null && target.IsEmpty)
+                {
+                    targetIndex = i;
+                    break;
+                }
+            }
+
+            if (targetIndex < 0)
+            {
+                Debug.Log(
+                    "SPLIT FAILED: No empty slot available.");
+
+                Close();
+                return;
+            }
+
+            Debug.Log(
+                $"SPLIT requested: Slot {slotIndex} -> Slot {targetIndex}, Quantity {quantity}");
+
+            var result =
+                inventoryUI.Inventory.SplitStack(
+                    slotIndex,
+                    targetIndex,
+                    quantity);
+
+            Debug.Log(
+                result.Succeeded
+                    ? $"SPLIT SUCCESS: Slot {slotIndex} -> Slot {targetIndex}"
+                    : $"SPLIT FAILED: {result.Failure}");
+
+            if (result.Succeeded)
+                RefreshUI();
+
+            Close();
+        }
+
+        private void RefreshUI()
+        {
+            inventoryUI.RefreshInventoryUI();
+        }
+
+        private bool TryGetSelectedSlot(
+            out InventorySlot slot)
+        {
+            slot = null;
+
+            if (inventoryUI == null)
+                return false;
+
+            if (slotIndex < 0 ||
+                slotIndex >= inventoryUI.Inventory.Capacity)
+                return false;
+
+            slot =
+                inventoryUI.Inventory.GetSlot(slotIndex);
+
+            return slot != null && !slot.IsEmpty;
+        }
+
+        public void Close()
+        {
+            slotIndex = -1;
+            gameObject.SetActive(false);
+        }
+    }
+}

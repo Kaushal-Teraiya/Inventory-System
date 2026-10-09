@@ -1,4 +1,5 @@
-﻿using InventorySystem.Inventory;
+﻿
+using InventorySystem.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,7 +25,7 @@ namespace InventorySystem.UI
 
         public void Open(int index)
         {
-            if (inventoryUI == null)
+            if (inventoryUI == null || inventoryUI.Inventory == null)
                 return;
 
             var inventory = inventoryUI.Inventory;
@@ -33,22 +34,17 @@ namespace InventorySystem.UI
                 return;
 
             var slot = inventory.GetSlot(index);
-
             if (slot == null || slot.IsEmpty)
                 return;
 
             slotIndex = index;
-
             inventoryUI.SelectSlot(index);
 
             if (Mouse.current != null)
-                transform.position =
-                    Mouse.current.position.ReadValue();
+                transform.position = Mouse.current.position.ReadValue();
 
             gameObject.SetActive(true);
-
-            Debug.Log(
-                $"Context Menu opened for Slot {slotIndex}");
+            Debug.Log($"Context Menu opened for Slot {slotIndex}");
         }
 
         public void Use()
@@ -59,22 +55,13 @@ namespace InventorySystem.UI
                 return;
             }
 
-            Debug.Log(
-                $"USE requested for Slot {slotIndex}");
+            Debug.Log($"USE requested for Slot {slotIndex}");
 
-            var result =
-                inventoryUI.Inventory.RemoveFromSlot(
-                    slotIndex,
-                    1);
+            // InventoryUI handles the item effect and consumes the item
+            // only when the effect succeeds.
+            inventoryUI.UseSlot(slotIndex);
 
-            Debug.Log(
-                result.Succeeded
-                    ? $"USE SUCCESS: Slot {slotIndex}"
-                    : $"USE FAILED: Slot {slotIndex}, {result.Failure}");
-
-            if (result.Succeeded)
-                RefreshUI();
-
+            RefreshUI();
             Close();
         }
 
@@ -91,10 +78,7 @@ namespace InventorySystem.UI
             Debug.Log(
                 $"DROP requested for Slot {slotIndex}, Quantity {quantity}");
 
-            var result =
-                inventoryUI.Inventory.RemoveFromSlot(
-                    slotIndex,
-                    quantity);
+            var result = inventoryUI.Inventory.RemoveFromSlot(slotIndex, quantity);
 
             Debug.Log(
                 result.Succeeded
@@ -115,8 +99,7 @@ namespace InventorySystem.UI
                 return;
             }
 
-            int quantity =
-                source.Stack.Quantity / 2;
+            int quantity = source.Stack.Quantity / 2;
 
             if (quantity <= 0)
             {
@@ -129,15 +112,12 @@ namespace InventorySystem.UI
 
             int targetIndex = -1;
 
-            for (int i = 0;
-                 i < inventoryUI.Inventory.Capacity;
-                 i++)
+            for (int i = 0; i < inventoryUI.Inventory.Capacity; i++)
             {
                 if (i == slotIndex)
                     continue;
 
-                var target =
-                    inventoryUI.Inventory.GetSlot(i);
+                var target = inventoryUI.Inventory.GetSlot(i);
 
                 if (target != null && target.IsEmpty)
                 {
@@ -148,9 +128,7 @@ namespace InventorySystem.UI
 
             if (targetIndex < 0)
             {
-                Debug.Log(
-                    "SPLIT FAILED: No empty slot available.");
-
+                Debug.Log("SPLIT FAILED: No empty slot available.");
                 Close();
                 return;
             }
@@ -158,11 +136,10 @@ namespace InventorySystem.UI
             Debug.Log(
                 $"SPLIT requested: Slot {slotIndex} -> Slot {targetIndex}, Quantity {quantity}");
 
-            var result =
-                inventoryUI.Inventory.SplitStack(
-                    slotIndex,
-                    targetIndex,
-                    quantity);
+            var result = inventoryUI.Inventory.SplitStack(
+                slotIndex,
+                targetIndex,
+                quantity);
 
             Debug.Log(
                 result.Succeeded
@@ -177,23 +154,23 @@ namespace InventorySystem.UI
 
         private void RefreshUI()
         {
-            inventoryUI.RefreshInventoryUI();
+            if (inventoryUI != null)
+                inventoryUI.RefreshInventoryUI();
         }
 
-        private bool TryGetSelectedSlot(
-            out InventorySlot slot)
+        private bool TryGetSelectedSlot(out InventorySlot slot)
         {
             slot = null;
 
-            if (inventoryUI == null)
+            if (inventoryUI == null || inventoryUI.Inventory == null)
                 return false;
 
-            if (slotIndex < 0 ||
-                slotIndex >= inventoryUI.Inventory.Capacity)
+            var inventory = inventoryUI.Inventory;
+
+            if (slotIndex < 0 || slotIndex >= inventory.Capacity)
                 return false;
 
-            slot =
-                inventoryUI.Inventory.GetSlot(slotIndex);
+            slot = inventory.GetSlot(slotIndex);
 
             return slot != null && !slot.IsEmpty;
         }

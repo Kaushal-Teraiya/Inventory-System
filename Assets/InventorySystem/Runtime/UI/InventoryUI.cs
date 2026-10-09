@@ -1,7 +1,10 @@
-﻿using InventorySystem.Domain;
+﻿using System.Collections.Generic;
+using InventorySystem.Domain;
 using InventorySystem.Inventory;
 using InventorySystem.Items;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace InventorySystem.UI
 {
@@ -10,136 +13,287 @@ namespace InventorySystem.UI
         [SerializeField] private int inventoryCapacity = 24;
         [SerializeField] private ItemDefinition testItem;
         [SerializeField] private int testQuantity = 5;
+        [SerializeField] private Health playerHealth;
+        private readonly ItemUseService itemUseService = new ItemUseService();
 
         private _Inventory inventory;
         private InventorySlotUI[] slots;
-        private InventoryUIMouseInput mouseInput;
         private int selectedSlotIndex = -1;
+        private int splitSource = -1;
+        private TMP_Text details, itemName;
+        private Image itemPreview;
+        private Button useButton, dropButton, splitButton, closeButton;
 
         public _Inventory Inventory => inventory;
         public int SelectedSlotIndex => selectedSlotIndex;
 
-        public InventorySlotUI SelectedSlotUI =>
-            selectedSlotIndex >= 0 && selectedSlotIndex < slots.Length
-                ? slots[selectedSlotIndex]
-                : null;
-
         private void Awake()
         {
-            inventory = new _Inventory(inventoryCapacity);
-
-            var slotTransforms =
-                GetComponentsInChildren<Transform>(true);
-
-            var foundSlots =
-                new System.Collections.Generic.List<InventorySlotUI>();
-
-            foreach (var transform in slotTransforms)
+            var found = new List<InventorySlotUI>();
+            foreach (var t in GetComponentsInChildren<Transform>(true))
             {
-                if (!transform.name.StartsWith("Slot_"))
-                    continue;
-
-                var slotUI =
-                    transform.GetComponent<InventorySlotUI>();
-
-                if (slotUI == null)
-                    slotUI =
-                        transform.gameObject.AddComponent<InventorySlotUI>();
-
-                foundSlots.Add(slotUI);
+                if (!t.name.StartsWith("Slot_")) continue;
+                var slot = t.GetComponent<InventorySlotUI>();
+                if (slot == null) slot = t.gameObject.AddComponent<InventorySlotUI>();
+                found.Add(slot);
             }
 
-            foundSlots.Sort((a, b) =>
+            found.Sort((a,b) => ParseIndex(a.name).CompareTo(ParseIndex(b.name)));
+            slots = found.ToArray();
+            inventoryCapacity = Mathf.Max(1, inventoryCapacity);
+            inventory = new _Inventory(Mathf.Min(inventoryCapacity, slots.Length));
+
+            for (int i = 0; i < slots.Length; i++)
             {
-                int aIndex = int.Parse(a.name.Substring(5));
-                int bIndex = int.Parse(b.name.Substring(5));
-
-                return aIndex.CompareTo(bIndex);
-            });
-
-            slots = foundSlots.ToArray();
-
-            mouseInput = GetComponent<InventoryUIMouseInput>();
-
-            if (mouseInput == null)
-                mouseInput = gameObject.AddComponent<InventoryUIMouseInput>();
-
-            Debug.Log(
-                $"InventoryUI initialized. " +
-                $"Inventory capacity={inventory.Capacity}, " +
-                $"UI slots found={slots.Length}");
-
-            if (testItem != null)
-            {
-                inventory.AddItem(
-                    new ItemInstance(testItem),
-                    testQuantity);
-            }
-        }
-
-        private void OnEnable()
-        {
-            if (inventory == null)
-                return;
-
-            inventory.SlotChanged += HandleSlotChanged;
-            RefreshInventoryUI();
-        }
-
-        private void OnDisable()
-        {
-            if (inventory != null)
-                inventory.SlotChanged -= HandleSlotChanged;
-        }
-
-
-        public void SelectSlot(int slotIndex)
-        {
-            if (slotIndex < 0 || slotIndex >= slots.Length)
-                return;
-
-            if (selectedSlotIndex >= 0 &&
-                selectedSlotIndex < slots.Length)
-            {
-                slots[selectedSlotIndex].SetSelected(false);
+                if (i >= inventory.Capacity) break;
+                slots[i].Bind(inventory.GetSlot(i));
+                int index = i;
+                var button = slots[i].GetComponent<Button>();
+                if (button != null)
+                {
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() => SelectSlot(index));
+                }
             }
 
-            selectedSlotIndex = slotIndex;
-            slots[selectedSlotIndex].SetSelected(true);
+            BuildDetailsPanel();
+
+            inventory.SlotChanged += OnSlotChanged;
+            inventory.InventoryChanged += RefreshDetails;
+
+            if (testItem != null && testItem.IsValid)
+                inventory.AddItem(new ItemInstance(testItem), Mathf.Max(1, testQuantity));
+
+            RefreshDetails();
         }
-        private void HandleSlotChanged(InventorySlot changedSlot)
+
+        private static int ParseIndex(string name)
         {
-            if (changedSlot == null)
-                return;
-
-            if (changedSlot.Index < 0 ||
-                changedSlot.Index >= slots.Length)
-                return;
-
-            Debug.Log(
-                $"Refreshing UI slot {changedSlot.Index}");
-
-            slots[changedSlot.Index].Refresh();
+            return int.TryParse(name.Substring(5), out int i) ? i : int.MaxValue;
         }
+
+        private void BuildDetailsPanel()
+        {
+            var panel = transform.Find("InventoryPanel");
+            if (panel == null) panel = transform;
+
+            var box = panel.Find("ItemDetailsPanel");
+            if (box == null)
+            {
+                Debug.LogError("ItemDetailsPanel is missing. Run Inventory System > Generate Godot-Style UI.");
+                return;
+            }
+
+            // Keep the generator-created hierarchy; never destroy its preview or layout.
+            var previewTransform = box.Find("ItemPreview");
+            if (previewTransform != null)
+                itemPreview = previewTransform.GetComponent<Image>();
+
+            var nameTransform = box.Find("ItemName");
+            if (nameTransform != null)
+                itemName = nameTransform.GetComponent<TMP_Text>();
+
+            details = box.Find("ItemDetails")?.GetComponent<TMP_Text>();
+
+            useButton = box.Find("UseButton")?.GetComponent<Button>();
+            dropButton = box.Find("DropButton")?.GetComponent<Button>();
+            splitButton = box.Find("SplitButton")?.GetComponent<Button>();
+            closeButton = box.Find("CloseButton")?.GetComponent<Button>();
+
+            if (useButton != null) {
+                useButton.onClick.RemoveAllListeners();
+                useButton.onClick.AddListener(UseSelectedItem);
+            }
+            if (dropButton != null) {
+                dropButton.onClick.RemoveAllListeners();
+                dropButton.onClick.AddListener(DropSelectedItem);
+            }
+            if (splitButton != null) {
+                splitButton.onClick.RemoveAllListeners();
+                splitButton.onClick.AddListener(BeginSplit);
+            }
+            if (closeButton != null) {
+                closeButton.onClick.RemoveAllListeners();
+                closeButton.onClick.AddListener(() => gameObject.SetActive(false));
+            }
+
+            if (itemPreview != null) {
+                itemPreview.sprite = null;
+                itemPreview.enabled = false;
+                itemPreview.preserveAspect = true;
+                itemPreview.color = Color.white;
+            }
+
+            RefreshDetails();
+        }
+        private static TMP_Text MakeText(Transform parent, string name, string value,
+            float size, Vector2 amin, Vector2 amax, Vector2 pos, Vector2 dimensions)
+        {
+            var go = new GameObject(name, typeof(RectTransform), typeof(TextMeshProUGUI));
+            go.transform.SetParent(parent, false);
+            var r = go.GetComponent<RectTransform>();
+            r.anchorMin = amin; r.anchorMax = amax; r.pivot = new Vector2(.5f, 1);
+            r.anchoredPosition = pos; r.sizeDelta = dimensions;
+            var text = go.GetComponent<TMP_Text>();
+            text.text = value; text.fontSize = size; text.color = Color.white;
+            text.alignment = TextAlignmentOptions.TopLeft;
+            text.textWrappingMode = TextWrappingModes.Normal; text.raycastTarget = false;
+            return text;
+        }
+
+        private static Button MakeButton(Transform parent, string name, string label, float y)
+        {
+            var go = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
+            go.transform.SetParent(parent, false);
+            var r = go.GetComponent<RectTransform>();
+            r.anchorMin = new Vector2(.5f, 1); r.anchorMax = new Vector2(.5f, 1);
+            r.pivot = new Vector2(.5f, 1); r.anchoredPosition = new Vector2(0, y);
+            r.sizeDelta = new Vector2(220, 36);
+            go.GetComponent<Image>().color = new Color(.30f,.20f,.48f,1);
+            var button = go.GetComponent<Button>();
+            var text = MakeText(go.transform, "Label", label, 15,
+                Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+            text.alignment = TextAlignmentOptions.Center;
+            var tr = text.rectTransform;
+            tr.anchorMin = Vector2.zero; tr.anchorMax = Vector2.one;
+            tr.offsetMin = Vector2.zero; tr.offsetMax = Vector2.zero;
+            return button;
+        }
+
 
         public void RefreshInventoryUI()
         {
-            if (inventory == null)
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i] != null)
+                    slots[i].Refresh();
+            }
+
+            RefreshDetails();
+        }
+        public void SelectSlot(int index)
+        {
+            if (index < 0 || index >= inventory.Capacity) return;
+            selectedSlotIndex = index;
+            for (int i = 0; i < slots.Length; i++) slots[i].SetSelected(i == index);
+            RefreshDetails();
+        }
+
+        public void MoveSlots(int source, int target)
+        {
+            if (splitSource >= 0)
+            {
+                if (source == splitSource && target != source)
+                {
+                    var s = inventory.GetSlot(source);
+                    if (s != null && !s.IsEmpty && s.Stack.Quantity > 1)
+                    {
+                        int amount = s.Stack.Quantity / 2;
+                        var result = inventory.SplitStack(source, target, amount);
+                        if (!result.Succeeded) Debug.LogWarning("Split failed: destination must be empty.");
+                    }
+                }
+                splitSource = -1;
+            }
+            else
+            {
+                var result = inventory.MoveItem(source, target);
+                if (!result.Succeeded) Debug.LogWarning("Move failed.");
+            }
+            SelectSlot(target);
+        }
+
+        private void BeginSplit()
+        {
+            var slot = inventory.GetSlot(selectedSlotIndex);
+            if (slot == null || slot.IsEmpty || slot.Stack.Quantity < 2)
+            {
+                Debug.Log("Select a stack containing at least two items.");
                 return;
+            }
+            splitSource = selectedSlotIndex;
+            Debug.Log("Split mode: drag the selected stack onto an empty slot.");
+        }
 
-            int count = Mathf.Min(
-                inventory.Capacity,
-                slots.Length);
+        public bool UseSlot(int index)
+        {
+            if (inventory == null || playerHealth == null)
+            {
+                Debug.LogError("Assign the player's Health component to InventoryUI.");
+                return false;
+            }
 
-            Debug.Log(
-                $"Binding {count} inventory slots.");
+            bool used = itemUseService.TryUse(inventory, index, playerHealth, out string message);
+            if (!used)
+                Debug.LogWarning("Item use failed: " + message);
+            else
+                Debug.Log(message);
 
-            for (int i = 0; i < count; i++)
-                slots[i].Bind(
-                    inventory.GetSlot(i));
+            RefreshInventoryUI();
+            return used;
+        }
+
+        private void UseSelectedItem()
+        {
+            UseSlot(selectedSlotIndex);
+        }
+        private void DropSelectedItem()
+        {
+            var slot = inventory.GetSlot(selectedSlotIndex);
+            if (slot == null || slot.IsEmpty) return;
+            var result = inventory.RemoveFromSlot(selectedSlotIndex, 1);
+            if (!result.Succeeded) Debug.LogWarning("Could not drop item.");
+            RefreshDetails();
+        }
+
+        private void OnSlotChanged(InventorySlot slot)
+        {
+            if (slot == null || slots == null || slot.Index >= slots.Length) return;
+            slots[slot.Index].Refresh();
+            RefreshDetails();
+        }
+
+        private void RefreshDetails()
+        {
+            if (inventory == null) return;
+
+            var slot = inventory.GetSlot(selectedSlotIndex);
+            bool hasItem = slot != null && !slot.IsEmpty;
+            var def = hasItem ? slot.Stack.Item?.Definition : null;
+            hasItem = hasItem && def != null;
+
+            if (itemName != null)
+                itemName.text = hasItem ? def.DisplayName : "Select an item";
+
+            if (itemPreview != null)
+            {
+                itemPreview.sprite = hasItem ? def.Icon : null;
+                itemPreview.enabled = hasItem && def.Icon != null;
+                itemPreview.preserveAspect = true;
+            }
+
+            if (details != null)
+                details.text = hasItem
+                    ? $"Quantity: {slot.Stack.Quantity}\nWeight: {def.Weight:0.##}\nStack limit: {def.MaxStackSize}"
+                    : "Choose an item to view its details.";
+
+            if (useButton != null) useButton.interactable = hasItem;
+            if (dropButton != null) dropButton.interactable = hasItem;
+            if (splitButton != null)
+                splitButton.interactable = hasItem && slot.Stack.Quantity > 1;
+        }
+        private void OnDestroy()
+        {
+            if (inventory != null)
+            {
+                inventory.SlotChanged -= OnSlotChanged;
+                inventory.InventoryChanged -= RefreshDetails;
+            }
         }
     }
 }
+
+
 
 
 
